@@ -1,0 +1,16 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package pt.ests.pa.model.passageiro;
+
+/**
+ *
+ * @author Rui
+ */
+public class Passageiro {
+    private int destino;
+    private Object estado;
+    private Object tipo;
+    private int tempoDeEspera;
+}
