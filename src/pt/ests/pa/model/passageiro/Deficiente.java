@@ -12,6 +12,6 @@ public class Deficiente extends Passageiro {
 
     @Override
     public String toString() {
-        return "D"; //To change body of generated methods, choose Tools | Templates.
+        return "D";
     }
 }
