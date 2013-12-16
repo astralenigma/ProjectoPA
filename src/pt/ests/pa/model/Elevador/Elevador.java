@@ -3,10 +3,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package pt.ests.pa.model.Elevador;
+package pt.ests.pa.model.elevador;
 
 import pt.ests.pa.model.ElevadorNoPisoZeroException;
 import pt.ests.pa.model.passageiro.Passageiro;
+import pt.ests.pa.model.tads.priorityqueue.PriorityQueue;
 
 /**
  *
@@ -17,7 +18,7 @@ public class Elevador {
     private int piso;
     private StateElevador estado;
     private boolean estadoDasPortas;
-    private Passageiro passageiro;
+    private PriorityQueue<Passageiro> passageiro;
     private int nPisosPercorridos=0;
 
 //    public Elevador(int piso, Object estado, Passageiro passageiro) {

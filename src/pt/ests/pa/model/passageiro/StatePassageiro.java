@@ -4,28 +4,27 @@
  */
 package pt.ests.pa.model.passageiro;
 
-import pt.ests.pa.model.Elevador.*;
 import pt.ests.pa.model.exceptions.InvalidStateTransitionException;
 
 /**
  *
- * @author brunomnsilva
+ * @author Rui Carvalho
  */
 public abstract class StatePassageiro {
 
-    private Passageiro machine;
+    private Passageiro passageiro;
 
-    public StatePassageiro(Passageiro machine) {
-        this.machine = machine;
+    public StatePassageiro(Passageiro passageiro) {
+        this.passageiro = passageiro;
     }
 
     public Passageiro getPassageiro() {
-        return machine;
+        return passageiro;
     }
 
-    public abstract void servido() throws InvalidStateTransitionException;
+    public abstract void entrar() throws InvalidStateTransitionException;
 
-    public abstract void emEspera() throws InvalidStateTransitionException;
+    public abstract void sair() throws InvalidStateTransitionException;
 
-    public abstract void emTransporte() throws InvalidStateTransitionException;
+    
 }

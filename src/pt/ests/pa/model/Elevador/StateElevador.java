@@ -2,24 +2,24 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package pt.ests.pa.model.Elevador;
+package pt.ests.pa.model.elevador;
 
 import pt.ests.pa.model.exceptions.InvalidStateTransitionException;
 
 /**
  *
- * @author brunomnsilva
+ * @author Rui Carvalho
  */
 public abstract class StateElevador {
 
-    private Elevador machine;
+    private Elevador elevador;
 
-    public StateElevador(Elevador machine) {
-        this.machine = machine;
+    public StateElevador(Elevador elevador) {
+        this.elevador = elevador;
     }
 
     public Elevador getElevador() {
-        return machine;
+        return elevador;
     }
 
     public abstract void subir() throws InvalidStateTransitionException;
