@@ -43,30 +43,30 @@ public class PriorityQueueAdapter<E extends Comparable<E>> implements PriorityQu
 
     @Override
     public void enqueue(E elem) throws FullPriorityQueueException {
-        if (size()==capacity) {
+        if (size() == capacity) {
             throw new FullPriorityQueueException();
         }
-            ArrayList<E> array = new ArrayListDNode<>(capacity);
-            //Vai procurar o espaco onde inserir
-            while (!isEmpty() && pQueue.get(0).compareTo(elem) < 0) {
+        ArrayList<E> array = new ArrayListDNode<>(capacity);
+        //Vai procurar o espaco onde inserir
+        while (!isEmpty() && pQueue.get(0).compareTo(elem) < 0) {
+            array.add(array.size(), pQueue.remove(0));
+        }
+        //verifica o tamanho e insere naquele com maior tamanho
+        if (pQueue.size() >= array.size()) {
+            //O Adaptee é o maior.
+            pQueue.add(0, elem);
+            while (!array.isEmpty()) {
+                pQueue.add(0, array.remove(array.size() - 1));
+            }
+        } else {
+            //O ArrayList auxiliar é o maior.
+            array.add(array.size(), elem);
+            while (!isEmpty()) {
                 array.add(array.size(), pQueue.remove(0));
             }
-            //verifica o tamanho e insere naquele com maior tamanho
-            if (pQueue.size() >= array.size()) {
-                //O Adaptee é o maior.
-                pQueue.add(0, elem);
-                while (!array.isEmpty()) {
-                    pQueue.add(0, array.remove(array.size() - 1));
-                }
-            } else {
-                //O ArrayList auxiliar é o maior.
-                array.add(array.size(), elem);
-                while (!isEmpty()) {
-                    array.add(array.size(), pQueue.remove(0));
-                }
-                pQueue = array;
-            }
-        
+            pQueue = array;
+        }
+
     }
 
     @Override
@@ -95,8 +95,9 @@ public class PriorityQueueAdapter<E extends Comparable<E>> implements PriorityQu
         String string = "[";
         for (Iterator it = getIterator(); it.hasNext();) {
             string += it.getNext();
-            string += (it.hasNext()) ? ", " : "]";
+            string += (it.hasNext()) ? ", " : "";
         }
+        string += "]";
         return string; //To change body of generated methods, choose Tools | Templates.
     }
 }

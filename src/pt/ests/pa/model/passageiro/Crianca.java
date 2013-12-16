@@ -8,6 +8,10 @@ package pt.ests.pa.model.passageiro;
  *
  * @author Rui
  */
-public class Crianca extends Passageiro{
-    
+public class Crianca extends Passageiro {
+
+    @Override
+    public String toString() {
+        return "C";
+    }
 }

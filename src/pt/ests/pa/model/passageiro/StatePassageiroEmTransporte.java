@@ -10,7 +10,7 @@ import pt.ests.pa.model.exceptions.InvalidStateTransitionException;
  *
  * @author Rui
  */
-public class StatePassageiroEmTransporte extends StatePassageiro{
+public class StatePassageiroEmTransporte extends StatePassageiro {
 
     public StatePassageiroEmTransporte(Passageiro passageiro) {
         super(passageiro);
@@ -23,9 +23,6 @@ public class StatePassageiroEmTransporte extends StatePassageiro{
 
     @Override
     public void sair() throws InvalidStateTransitionException {
-       // getPassageiro().
+        //Eliminar o Passageiro Quem sabe.
     }
-    
-    
-    
 }

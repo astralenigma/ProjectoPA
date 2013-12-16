@@ -4,6 +4,8 @@
  */
 package projectopajavaconsole;
 
+import pt.ests.pa.model.Piso;
+
 /**
  *
  * @author Rui
@@ -14,6 +16,7 @@ public class ProjectoPAJavaConsole {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Piso piso = new Piso(5);
+        System.out.println(piso);
     }
 }

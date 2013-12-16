@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package pt.ests.pa.model.elevador;
+package pt.ests.pa.model.Elevador;
 
 import pt.ests.pa.model.exceptions.InvalidStateTransitionException;
 
@@ -24,11 +24,13 @@ public abstract class StateElevador {
 
     public abstract void subir() throws InvalidStateTransitionException;
 
-    public abstract void paradoPortaAberta() throws InvalidStateTransitionException;
+    public abstract void abrirPortas() throws InvalidStateTransitionException;
 
-    public abstract void paradoPortaFechada() throws InvalidStateTransitionException;
+    public abstract void fecharPortas() throws InvalidStateTransitionException;
 
     public abstract void descer() throws InvalidStateTransitionException;
 
-    public abstract void entradaSaida() throws InvalidStateTransitionException;
+    public abstract void entradaSaidaDePassageiros() throws InvalidStateTransitionException;
+
+    public abstract void pararElevador() throws InvalidStateTransitionException;
 }

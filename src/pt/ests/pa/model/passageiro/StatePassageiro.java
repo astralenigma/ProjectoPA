@@ -25,6 +25,4 @@ public abstract class StatePassageiro {
     public abstract void entrar() throws InvalidStateTransitionException;
 
     public abstract void sair() throws InvalidStateTransitionException;
-
-    
 }

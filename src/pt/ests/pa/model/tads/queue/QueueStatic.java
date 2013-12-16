@@ -17,7 +17,7 @@ public class QueueStatic<E> implements Queue<E> {
     private int begin, end;
     private int capacity;
     private E[] queue;
-    private static final int DEFAUlTCAPACITY=100;
+    private static final int DEFAUlTCAPACITY = 100;
 
     @Override
     public int size() {
@@ -29,10 +29,11 @@ public class QueueStatic<E> implements Queue<E> {
     }
 
     public QueueStatic(int capacity) {
-        queue=(E[]) new Object[capacity];
-        begin=end=0;
-        this.capacity=capacity;
+        queue = (E[]) new Object[capacity];
+        begin = end = 0;
+        this.capacity = capacity;
     }
+
     public QueueStatic() {
         this(DEFAUlTCAPACITY);
     }
@@ -109,8 +110,9 @@ public class QueueStatic<E> implements Queue<E> {
         String string = "[";
         for (Iterator it = getIterator(); it.hasNext();) {
             string += it.getNext();
-            string += (it.hasNext()) ? ", " : "]";
+            string += (it.hasNext()) ? ", " : "";
         }
+        string += "]";
         return string; //To change body of generated methods, choose Tools | Templates.
     }
 }

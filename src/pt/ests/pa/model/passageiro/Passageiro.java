@@ -15,8 +15,12 @@ public class Passageiro implements Comparable<Passageiro> {
     private int tempoDeEspera;
 
     public Passageiro() {
-        estado= new StatePassageiroEmEspera(this);
-        tempoDeEspera=0;
+        estado = new StatePassageiroEmEspera(this);
+        tempoDeEspera = 0;
+    }
+
+    public void setEstado(StatePassageiro estado) {
+        this.estado = estado;
     }
 
     private static int compare(Passageiro passageiro) {
@@ -28,14 +32,14 @@ public class Passageiro implements Comparable<Passageiro> {
         }
         return 1;
     }
-    
-    public void incrementarTempoDeEspera(){
+
+    public void incrementarTempoDeEspera() {
         tempoDeEspera++;
     }
-    
+
     @Override
     public int compareTo(Passageiro t) {
-        
+
 //        Precisamos de 2 compareTos dependendo do estado do Passageiro talvez tenhamos que verificar o estado do elevador
 //        if (estado instanceof StatePassageiroEmTransporte) {
 //            return destino-origem;

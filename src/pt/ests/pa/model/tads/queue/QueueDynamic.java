@@ -48,7 +48,7 @@ public class QueueDynamic<E> implements Queue<E> {
         if (size == capacity) {
             throw new FullQueueException();
         }
-        DNode<E> beforeTail=tail.getPrev();
+        DNode<E> beforeTail = tail.getPrev();
         DNode<E> newDNode = new DNode(elem, beforeTail, tail);
         beforeTail.setNext(newDNode);
         tail.setPrev(newDNode);
@@ -106,8 +106,9 @@ public class QueueDynamic<E> implements Queue<E> {
         String string = "[";
         for (Iterator it = getIterator(); it.hasNext();) {
             string += it.getNext();
-            string += (it.hasNext()) ? ", " : "]";
+            string += (it.hasNext()) ? ", " : "";
         }
+        string += "]";
         return string; //To change body of generated methods, choose Tools | Templates.
     }
 }

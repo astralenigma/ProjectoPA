@@ -8,6 +8,10 @@ package pt.ests.pa.model.passageiro;
  *
  * @author Rui
  */
-public class Adulto extends Passageiro{
-    
+public class Adulto extends Passageiro {
+
+    @Override
+    public String toString() {
+        return "A"; //To change body of generated methods, choose Tools | Templates.
+    }
 }

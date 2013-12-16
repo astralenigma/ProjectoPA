@@ -67,7 +67,7 @@ public class ArrayListDNode<E> implements ArrayList<E> {
     @Override
     public void add(int i, E elem) throws IndexOutOfBoundsException, FullArrayListException {
         DNode node = nodeAtIndex(i);
-        if (size==capacity) {
+        if (size == capacity) {
             throw new FullArrayListException();
         }
         DNode newNode = new DNode(elem, node.getPrev(), node);
@@ -106,9 +106,9 @@ public class ArrayListDNode<E> implements ArrayList<E> {
     }
 
     @Override
-    public E get(int i) throws IndexOutOfBoundsException ,EmptyArrayListException{
+    public E get(int i) throws IndexOutOfBoundsException, EmptyArrayListException {
         E elem = nodeAtIndex(i).getElem();
-        if(isEmpty()){
+        if (isEmpty()) {
             throw new EmptyArrayListException();
         }
         return elem;
@@ -160,8 +160,9 @@ public class ArrayListDNode<E> implements ArrayList<E> {
         String string = "[";
         for (Iterator it = getIterator(); it.hasNext();) {
             string += it.getNext();
-            string += (it.hasNext()) ? ", " : "]";
+            string += (it.hasNext()) ? ", " : "";
         }
+        string += "]";
         return string; //To change body of generated methods, choose Tools | Templates.
     }
 }
