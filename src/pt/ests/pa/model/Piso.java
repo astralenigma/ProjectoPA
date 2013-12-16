@@ -4,12 +4,20 @@
  */
 package pt.ests.pa.model;
 
+import pt.ests.pa.model.passageiro.Passageiro;
+import pt.ests.pa.model.tads.priorityqueue.PriorityQueue;
+import pt.ests.pa.model.tads.priorityqueue.PriorityQueueDynamic;
+
 /**
  *
  * @author Rui
  */
 public class Piso {
     private int nPiso;
-    private Object passageiros;
-    
+    private PriorityQueue<Passageiro> passageiros;
+
+    public Piso(int nPiso) {
+        this.nPiso=nPiso;
+        passageiros=new PriorityQueueDynamic<>();
+    }
 }
