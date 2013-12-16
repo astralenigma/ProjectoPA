@@ -18,12 +18,12 @@ public class StateElevadorPortasFechadas extends StateElevador {
 
     @Override
     public void subir() throws InvalidStateTransitionException {
-        
+        getElevador().setEstado(new StateElevadorSubir(getElevador()));
     }
 
     @Override
     public void abrirPortas() throws InvalidStateTransitionException {
-        
+        getElevador().setEstado(new StateElevadorPortasAbertas(getElevador()));
     }
 
     @Override
@@ -33,7 +33,7 @@ public class StateElevadorPortasFechadas extends StateElevador {
 
     @Override
     public void descer() throws InvalidStateTransitionException {
-        //getElevador().
+        getElevador().setEstado(new StateElevadorDescer(getElevador()));
     }
 
     @Override

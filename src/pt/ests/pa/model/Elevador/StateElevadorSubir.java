@@ -38,11 +38,11 @@ public class StateElevadorSubir extends StateElevador {
 
     @Override
     public void entradaSaidaDePassageiros() throws InvalidStateTransitionException {
-        throw new InvalidStateTransitionException("O elevador encontra-se em movimento."); //To change body of generated methods, choose Tools | Templates.
+        throw new InvalidStateTransitionException("O elevador encontra-se em movimento.");
     }
 
     @Override
     public void pararElevador() throws InvalidStateTransitionException {
-        //Parar o elevador
+        getElevador().setEstado(new StateElevadorPortasFechadas(getElevador()));
     }
 }

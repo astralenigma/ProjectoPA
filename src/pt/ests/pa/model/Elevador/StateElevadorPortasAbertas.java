@@ -1,3 +1,4 @@
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -28,7 +29,7 @@ public class StateElevadorPortasAbertas extends StateElevador {
 
     @Override
     public void fecharPortas() throws InvalidStateTransitionException {
-        //Fechar as portas
+        getElevador().setEstado(new StateElevadorPortasFechadas(getElevador()));
     }
 
     @Override
@@ -38,7 +39,7 @@ public class StateElevadorPortasAbertas extends StateElevador {
 
     @Override
     public void entradaSaidaDePassageiros() throws InvalidStateTransitionException {
-        //Entrada e Saída de pessoas
+        getElevador().setEstado(new StateElevadorEntrandoSaindo(getElevador()));
     }
 
     @Override
