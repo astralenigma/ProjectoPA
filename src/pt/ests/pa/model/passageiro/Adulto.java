@@ -12,6 +12,6 @@ public class Adulto extends Passageiro {
 
     @Override
     public String toString() {
-        return "A";
+        return "A("+getOrigem()+","+getDestino()+")";
     }
 }

@@ -12,6 +12,6 @@ public class Crianca extends Passageiro {
 
     @Override
     public String toString() {
-        return "C";
+        return "C("+getOrigem()+","+getDestino()+")";
     }
 }

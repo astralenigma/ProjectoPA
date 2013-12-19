@@ -37,6 +37,15 @@ public class Passageiro implements Comparable<Passageiro> {
         tempoDeEspera++;
     }
 
+    public int getOrigem() {
+        return origem;
+    }
+
+    public int getDestino() {
+        return destino;
+    }
+    
+
     @Override
     public int compareTo(Passageiro t) {
 

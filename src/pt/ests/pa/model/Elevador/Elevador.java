@@ -49,6 +49,6 @@ public class Elevador {
 
     @Override
     public String toString() {
-        return String.format("|%10s|", passageiro);
+        return String.format("|%2s%2s%2s|",estado, passageiro,estado);
     }
 }
