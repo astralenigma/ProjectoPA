@@ -20,7 +20,6 @@ public class Elevador {
     private static final int CAPACIDADEELEVADOR = 10;
     private int piso;
     private StateElevador estado;
-    private boolean estadoDasPortas;
     private PriorityQueue<Passageiro> passageiro;
     private int nPisosPercorridos;
     private int tempoDeInactividade;
