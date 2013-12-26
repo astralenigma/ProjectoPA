@@ -22,12 +22,15 @@ public class Elevador {
     private StateElevador estado;
     private boolean estadoDasPortas;
     private PriorityQueue<Passageiro> passageiro;
-    private int nPisosPercorridos = 0;
+    private int nPisosPercorridos;
+    private int tempoDeInactividade;
 
     public Elevador(int piso) {
         this.piso = piso;
         this.estado = new StateElevadorPortasFechadas(this);
         this.passageiro = new PriorityQueueDynamic<>(CAPACIDADEELEVADOR);
+        tempoDeInactividade = 0;
+        nPisosPercorridos = 0;
     }
 
     public void subir() {
@@ -49,6 +52,6 @@ public class Elevador {
 
     @Override
     public String toString() {
-        return String.format("|%2s%2s%2s|",estado, passageiro,estado);
+        return String.format("|%2s%2s%2s|", estado, passageiro, estado);
     }
 }
