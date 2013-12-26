@@ -5,13 +5,26 @@
 package pt.ests.pa.model.passageiro;
 
 /**
+ * Classe do Crianca
  *
  * @author Rui
  */
 public class Crianca extends Passageiro {
 
+    /**
+     *
+     * @param nmrMaxPisos
+     */
+    public Crianca(int nmrMaxPisos) {
+        super(nmrMaxPisos);
+    }
+
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
-        return "C("+getOrigem()+","+getDestino()+")";
+        return "C(" + getOrigem() + "," + getDestino() + ")";
     }
 }

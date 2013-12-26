@@ -12,35 +12,63 @@ import pt.ests.pa.model.exceptions.InvalidStateTransitionException;
  */
 public class StateElevadorPortasFechadas extends StateElevador {
 
+    /**
+     *
+     * @param elevador
+     */
     public StateElevadorPortasFechadas(Elevador elevador) {
         super(elevador);
     }
 
+    /**
+     *
+     * @throws InvalidStateTransitionException
+     */
     @Override
     public void subir() throws InvalidStateTransitionException {
         getElevador().setEstado(new StateElevadorSubir(getElevador()));
     }
 
+    /**
+     *
+     * @throws InvalidStateTransitionException
+     */
     @Override
     public void abrirPortas() throws InvalidStateTransitionException {
         getElevador().setEstado(new StateElevadorPortasAbertas(getElevador()));
     }
 
+    /**
+     *
+     * @throws InvalidStateTransitionException
+     */
     @Override
     public void fecharPortas() throws InvalidStateTransitionException {
         throw new InvalidStateTransitionException("Hmm... Como é que se fecha o que já está fechado?");
     }
 
+    /**
+     *
+     * @throws InvalidStateTransitionException
+     */
     @Override
     public void descer() throws InvalidStateTransitionException {
         getElevador().setEstado(new StateElevadorDescer(getElevador()));
     }
 
+    /**
+     *
+     * @throws InvalidStateTransitionException
+     */
     @Override
     public void entradaSaidaDePassageiros() throws InvalidStateTransitionException {
         throw new InvalidStateTransitionException("Não é possível entrar num elevador com as portas fechadas porque o simulador não aceita fantasmas.");
     }
 
+    /**
+     *
+     * @throws InvalidStateTransitionException
+     */
     @Override
     public void pararElevador() throws InvalidStateTransitionException {
         throw new InvalidStateTransitionException("O elevador já se encontra parado.");

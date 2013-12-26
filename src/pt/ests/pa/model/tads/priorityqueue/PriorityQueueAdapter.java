@@ -13,6 +13,7 @@ import pt.ests.pa.model.exceptions.FullArrayListException;
 
 /**
  *
+ * @param <E> Classe do Objecto a ser inserido na Fila De Prioridade
  * @author Rui
  */
 public class PriorityQueueAdapter<E extends Comparable<E>> implements PriorityQueue<E> {
@@ -20,27 +21,47 @@ public class PriorityQueueAdapter<E extends Comparable<E>> implements PriorityQu
     private ArrayList<E> pQueue;
     private int capacity;
 
+    /**
+     *
+     */
     public PriorityQueueAdapter() {
         pQueue = new ArrayListDNode();
         capacity = -1;
 
     }
 
+    /**
+     *
+     * @param capacity
+     */
     public PriorityQueueAdapter(int capacity) {
         pQueue = new ArrayListDNode<>(capacity);
         this.capacity = capacity;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int size() {
         return pQueue.size();
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public boolean isEmpty() {
         return pQueue.isEmpty();
     }
 
+    /**
+     *
+     * @param elem
+     * @throws FullPriorityQueueException
+     */
     @Override
     public void enqueue(E elem) throws FullPriorityQueueException {
         if (size() == capacity) {
@@ -69,6 +90,11 @@ public class PriorityQueueAdapter<E extends Comparable<E>> implements PriorityQu
 
     }
 
+    /**
+     *
+     * @return
+     * @throws EmptyPriorityQueueException
+     */
     @Override
     public E peek() throws EmptyPriorityQueueException {
         if (isEmpty()) {
@@ -77,6 +103,11 @@ public class PriorityQueueAdapter<E extends Comparable<E>> implements PriorityQu
         return pQueue.get(0);
     }
 
+    /**
+     *
+     * @return
+     * @throws EmptyPriorityQueueException
+     */
     @Override
     public E dequeue() throws EmptyPriorityQueueException {
         if (isEmpty()) {
@@ -85,11 +116,19 @@ public class PriorityQueueAdapter<E extends Comparable<E>> implements PriorityQu
         return pQueue.remove(0);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public Iterator<E> getIterator() {
         return pQueue.getIterator();
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         String string = "[";

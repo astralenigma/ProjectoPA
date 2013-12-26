@@ -5,13 +5,26 @@
 package pt.ests.pa.model.passageiro;
 
 /**
+ * Classe do Deficiente
  *
  * @author Rui
  */
 public class Deficiente extends Passageiro {
 
+    /**
+     *
+     * @param nmrMaxPisos
+     */
+    public Deficiente(int nmrMaxPisos) {
+        super(nmrMaxPisos);
+    }
+
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
-        return "D("+getOrigem()+","+getDestino()+")";
+        return "D(" + getOrigem() + "," + getDestino() + ")";
     }
 }

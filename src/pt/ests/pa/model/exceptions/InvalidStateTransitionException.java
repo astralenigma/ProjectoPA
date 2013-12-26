@@ -10,6 +10,10 @@ package pt.ests.pa.model.exceptions;
  */
 public class InvalidStateTransitionException extends RuntimeException {
 
+    /**
+     *
+     * @param message
+     */
     public InvalidStateTransitionException(String message) {
         super(message);
     }

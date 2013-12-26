@@ -11,6 +11,7 @@ import pt.ests.pa.model.tads.Iterator;
 
 /**
  *
+ * @param <E> Classe do Objecto a ser inserido na Fila De Prioridade
  * @author Rui
  */
 public class PriorityQueueDynamic<E extends Comparable<E>> implements PriorityQueue<E> {
@@ -19,6 +20,10 @@ public class PriorityQueueDynamic<E extends Comparable<E>> implements PriorityQu
     private int size;
     private int capacity;
 
+    /**
+     *
+     * @param capacity
+     */
     public PriorityQueueDynamic(int capacity) {
         this.head = new DNode(null, null, null);
         this.tail = new DNode(null, head, null);
@@ -27,10 +32,18 @@ public class PriorityQueueDynamic<E extends Comparable<E>> implements PriorityQu
         this.capacity = capacity;
     }
 
+    /**
+     *
+     */
     public PriorityQueueDynamic() {
         this(-1);
     }
 
+    /**
+     *
+     * @param elem
+     * @throws FullPriorityQueueException
+     */
     @Override
     public void enqueue(E elem) throws FullPriorityQueueException {
         if (capacity == size) {
@@ -56,6 +69,11 @@ public class PriorityQueueDynamic<E extends Comparable<E>> implements PriorityQu
         size++;
     }
 
+    /**
+     *
+     * @return
+     * @throws EmptyPriorityQueueException
+     */
     @Override
     public E dequeue() throws EmptyPriorityQueueException {
         if (isEmpty()) {
@@ -69,6 +87,11 @@ public class PriorityQueueDynamic<E extends Comparable<E>> implements PriorityQu
         return elem;
     }
 
+    /**
+     *
+     * @return
+     * @throws EmptyPriorityQueueException
+     */
     @Override
     public E peek() throws EmptyPriorityQueueException {
         if (isEmpty()) {
@@ -77,18 +100,30 @@ public class PriorityQueueDynamic<E extends Comparable<E>> implements PriorityQu
         return head.getNext().getElem();
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int size() {
         // TODO Auto-generated method stub
         return size;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public boolean isEmpty() {
         // TODO Auto-generated method stub
         return size == 0;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public Iterator<E> getIterator() {
         return new IteratorPriorityQueueDynamic();
@@ -115,6 +150,10 @@ public class PriorityQueueDynamic<E extends Comparable<E>> implements PriorityQu
         }
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         String string = "[";

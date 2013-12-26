@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package pt.ests.pa.model;
+package pt.ests.pa.model.exceptions;
 
 /**
  *

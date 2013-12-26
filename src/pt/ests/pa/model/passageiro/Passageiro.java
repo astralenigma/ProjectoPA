@@ -4,6 +4,8 @@
  */
 package pt.ests.pa.model.passageiro;
 
+import java.util.Random;
+
 /**
  *
  * @author Rui
@@ -14,11 +16,25 @@ public class Passageiro implements Comparable<Passageiro> {
     private StatePassageiro estado;
     private int tempoDeEspera;
 
-    public Passageiro() {
+    /**
+     *
+     * @param nmrMaxPisos
+     */
+    public Passageiro(int nmrMaxPisos) {
+        Random rd=new Random();
+        origem=rd.nextInt(nmrMaxPisos);
+        do{
+            destino=rd.nextInt(nmrMaxPisos);
+        }while(origem==destino);
         estado = new StatePassageiroEmEspera(this);
         tempoDeEspera = 0;
+        
     }
 
+    /**
+     *
+     * @param estado
+     */
     public void setEstado(StatePassageiro estado) {
         this.estado = estado;
     }
@@ -33,19 +49,35 @@ public class Passageiro implements Comparable<Passageiro> {
         return 1;
     }
 
+    /**
+     *
+     */
     public void incrementarTempoDeEspera() {
         tempoDeEspera++;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getOrigem() {
         return origem;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getDestino() {
         return destino;
     }
     
 
+    /**
+     *
+     * @param t
+     * @return
+     */
     @Override
     public int compareTo(Passageiro t) {
 

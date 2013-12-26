@@ -10,9 +10,25 @@ package pt.ests.pa.model.passageiro;
  */
 public abstract class CreatorPassageiro {
 
+    /**
+     *
+     */
     public static final int DEFICIENTE = 1;
+    /**
+     *
+     */
     public static final int CRIANCA = 2;
+    /**
+     *
+     */
     public static final int ADULTO = 3;
 
-    public abstract Passageiro factoryMethod(int tipoDePassageiro) throws IllegalArgumentException;
+    /**
+     *
+     * @param tipoDePassageiro
+     * @param nmrMaxPisos
+     * @return
+     * @throws IllegalArgumentException
+     */
+    public abstract Passageiro factoryMethod(int tipoDePassageiro,int nmrMaxPisos) throws IllegalArgumentException;
 }

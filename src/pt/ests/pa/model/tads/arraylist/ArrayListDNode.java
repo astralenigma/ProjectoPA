@@ -12,6 +12,7 @@ import pt.ests.pa.model.tads.Iterator;
 
 /**
  *
+ * @param <E> Classe do Objecto a ser inserido no ArrayList
  * @author Rui
  */
 public class ArrayListDNode<E> implements ArrayList<E> {
@@ -20,6 +21,10 @@ public class ArrayListDNode<E> implements ArrayList<E> {
     private int size;
     private int capacity;
 
+    /**
+     *
+     * @param capacity
+     */
     public ArrayListDNode(int capacity) {
         head = new DNode(null, null, null);
         tail = new DNode(null, head, null);
@@ -28,6 +33,9 @@ public class ArrayListDNode<E> implements ArrayList<E> {
         this.capacity = capacity;
     }
 
+    /**
+     *
+     */
     public ArrayListDNode() {
         this(-1);
     }
@@ -129,6 +137,10 @@ public class ArrayListDNode<E> implements ArrayList<E> {
 //        str+=(nodeAtIndex(size-1)+"]");
 //        return str; 
 //    }
+    /**
+     *
+     * @return
+     */
     @Override
     public Iterator<E> getIterator() {
         return new IteratorDNodeArrayList();
@@ -155,6 +167,10 @@ public class ArrayListDNode<E> implements ArrayList<E> {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         String string = "[";

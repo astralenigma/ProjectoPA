@@ -11,6 +11,7 @@ import pt.ests.pa.model.tads.Iterator;
 
 /**
  *
+ * @param <E> Classe do Objecto a ser inserido no ArrayList
  * @author Rui
  */
 public class ArrayListStatic<E> implements ArrayList<E> {
@@ -19,11 +20,18 @@ public class ArrayListStatic<E> implements ArrayList<E> {
     private int size;
     private static final int DEFAUlTCAPACITY = 100;
 
+    /**
+     *
+     * @param capacity
+     */
     public ArrayListStatic(int capacity) {
         array = (E[]) new Object[capacity];
         size = 0;
     }
 
+    /**
+     *
+     */
     public ArrayListStatic() {
         this(DEFAUlTCAPACITY);
     }
@@ -94,6 +102,10 @@ public class ArrayListStatic<E> implements ArrayList<E> {
         return remElem;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public Iterator<E> getIterator() {
         return new IteratorArrayListStatic();
@@ -120,6 +132,10 @@ public class ArrayListStatic<E> implements ArrayList<E> {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         String string = "[";
