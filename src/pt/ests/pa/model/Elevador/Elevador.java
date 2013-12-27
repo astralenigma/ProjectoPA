@@ -29,8 +29,9 @@ public class Elevador {
     private int tempoDeInactividade;
 
     /**
+     * Constructor do Elevador.
      *
-     * @param pisos
+     * @param pisos Lista dos pisos do prédio.
      */
     public Elevador(ArrayList<Piso> pisos) {
         this.pisos = pisos;
@@ -42,7 +43,7 @@ public class Elevador {
     }
 
     /**
-     *
+     * Método de fazer os elevadores subir.
      */
     public void subir() {
         piso++;
@@ -50,6 +51,7 @@ public class Elevador {
     }
 
     /**
+     * Método de fazer os elevadores descer.
      *
      * @throws ElevadorNoPisoZeroException
      */
@@ -62,17 +64,21 @@ public class Elevador {
     }
 
     /**
+     * Altera o estado do Elevador.
      *
-     * @param estado
+     * @param estado Novo estado do elevador.
      */
     public void setEstado(StateElevador estado) {
         this.estado = estado;
     }
 
     /**
-     *
-     * @return
+     * Recebe Passageiros dos pisos.
      */
+    public void receberPassageiros() {
+        passageiro.enqueue(pisos.get(piso).enviarPassageiro());
+    }
+
     @Override
     public String toString() {
         return String.format("|%2s%2s%2s|", estado, passageiro, estado);

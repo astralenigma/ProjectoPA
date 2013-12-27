@@ -9,6 +9,7 @@ import pt.ests.pa.model.tads.priorityqueue.PriorityQueue;
 import pt.ests.pa.model.tads.priorityqueue.PriorityQueueDynamic;
 
 /**
+ * Classe dos pisos contem o numero do piso e os passageiros a espera.
  *
  * @author Rui
  */
@@ -18,6 +19,7 @@ public class Piso {
     private PriorityQueue<Passageiro> passageiros;
 
     /**
+     * Constructor do piso recebe o numero do piso e gera a fila de passageiros.
      *
      * @param nPiso
      */
@@ -27,9 +29,14 @@ public class Piso {
     }
 
     /**
+     * Método usado para enviar os passageiros para o elevador.
      *
-     * @return
+     * @return Passageiro que vai entrar no elevador.
      */
+    public Passageiro enviarPassageiro() {
+        return passageiros.dequeue();
+    }
+
     @Override
     public String toString() {
         return String.format("%50s", passageiros);
