@@ -4,7 +4,11 @@
  */
 package projectopajavaconsole;
 
+import pt.ests.pa.model.exceptions.CapacidadeElevadorIlegalException;
 import pt.ests.pa.model.Piso;
+import pt.ests.pa.model.Predio;
+import pt.ests.pa.model.exceptions.QuantidadeElevadoresIlegalException;
+import pt.ests.pa.model.exceptions.QuantidadePisosIlegalException;
 import pt.ests.pa.model.passageiro.Adulto;
 import pt.ests.pa.model.passageiro.Crianca;
 import pt.ests.pa.model.passageiro.Deficiente;
@@ -19,7 +23,8 @@ public class ProjectoPAJavaConsole {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws QuantidadePisosIlegalException, QuantidadeElevadoresIlegalException, CapacidadeElevadorIlegalException {
+        Predio predio=Predio.getInstance();
         Piso piso = new Piso(5);
         System.out.println(piso);
 //        Passageiro[] passageiros =new Passageiro[3];

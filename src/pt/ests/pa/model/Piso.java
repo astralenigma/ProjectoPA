@@ -21,7 +21,7 @@ public class Piso {
     /**
      * Constructor do piso recebe o numero do piso e gera a fila de passageiros.
      *
-     * @param nPiso
+     * @param nPiso Numero do piso
      */
     public Piso(int nPiso) {
         this.nPiso = nPiso;

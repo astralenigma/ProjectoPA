@@ -18,9 +18,7 @@ import pt.ests.pa.model.tads.priorityqueue.PriorityQueueDynamic;
  * @author Rui
  */
 public class Elevador {
-//    private static final int pisoMax;
 
-    private static final int CAPACIDADEELEVADOR = 10;
     private int piso;
     private StateElevador estado;
     private PriorityQueue<Passageiro> passageiro;
@@ -33,11 +31,11 @@ public class Elevador {
      *
      * @param pisos Lista dos pisos do prédio.
      */
-    public Elevador(ArrayList<Piso> pisos) {
+    public Elevador(ArrayList<Piso> pisos, int capacidadeElevador) {
         this.pisos = pisos;
         this.piso = 0;
         this.estado = new StateElevadorPortasFechadas(this);
-        this.passageiro = new PriorityQueueDynamic<>(CAPACIDADEELEVADOR);
+        this.passageiro = new PriorityQueueDynamic<>(capacidadeElevador);
         tempoDeInactividade = 0;
         nPisosPercorridos = 0;
     }
