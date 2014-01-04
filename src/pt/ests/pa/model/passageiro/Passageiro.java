@@ -17,23 +17,26 @@ public class Passageiro implements Comparable<Passageiro> {
     private int tempoDeEspera;
 
     /**
+     * Constructor do Passageiro
      *
-     * @param nmrMaxPisos
+     * @param nmrMaxPisos Recebe o numero maximo dos pisos para gerar o destino
+     * e a origem.
      */
     public Passageiro(int nmrMaxPisos) {
-        Random rd=new Random();
-        origem=rd.nextInt(nmrMaxPisos);
-        do{
-            destino=rd.nextInt(nmrMaxPisos);
-        }while(origem==destino);
+        Random rd = new Random();
+        origem = rd.nextInt(nmrMaxPisos);
+        do {
+            destino = rd.nextInt(nmrMaxPisos);
+        } while (origem == destino);
         estado = new StatePassageiroEmEspera(this);
         tempoDeEspera = 0;
-        
+
     }
 
     /**
+     * Altera o estado do Passageiro
      *
-     * @param estado
+     * @param estado Espaço que se altera
      */
     public void setEstado(StatePassageiro estado) {
         this.estado = estado;
@@ -71,7 +74,6 @@ public class Passageiro implements Comparable<Passageiro> {
     public int getDestino() {
         return destino;
     }
-    
 
     /**
      *

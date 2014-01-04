@@ -51,4 +51,14 @@ public class Predio {
         }
         return instance;
     }
+
+    @Override
+    public String toString() {
+        String str ="";
+        for (int i = 0; i < 10; i++) {
+            str+= pisos.get(i);
+        }
+        return str; //To change body of generated methods, choose Tools | Templates.
+    }
+    
 }
