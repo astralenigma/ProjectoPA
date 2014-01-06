@@ -133,7 +133,7 @@ public class QueueStatic<E> implements Queue<E> {
         }
 
         @Override
-        public E getNext() {
+        public E next() {
             E elem = queue[pos];
             pos = (pos + 1) % capacity;
             return elem;
@@ -148,7 +148,7 @@ public class QueueStatic<E> implements Queue<E> {
     public String toString() {
         String string = "[";
         for (Iterator it = getIterator(); it.hasNext();) {
-            string += it.getNext();
+            string += it.next();
             string += (it.hasNext()) ? ", " : "";
         }
         string += "]";

@@ -133,7 +133,7 @@ public class PriorityQueueAdapter<E extends Comparable<E>> implements PriorityQu
     public String toString() {
         String string = "[";
         for (Iterator it = getIterator(); it.hasNext();) {
-            string += it.getNext();
+            string += it.next();
             string += (it.hasNext()) ? ", " : "";
         }
         string += "]";

@@ -114,7 +114,7 @@ public class StackStatic<E> implements Stack<E> {
         }
 
         @Override
-        public E getNext() {
+        public E next() {
             E elem = stack[pos++];
             return elem;
         }
@@ -133,7 +133,7 @@ public class StackStatic<E> implements Stack<E> {
     public String toString() {
         String string = "[";
         for (Iterator it = getIterator(); it.hasNext();) {
-            string += it.getNext();
+            string += it.next();
             string += (it.hasNext()) ? ", " : "";
         }
         string += "]";

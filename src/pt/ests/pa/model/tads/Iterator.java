@@ -14,7 +14,7 @@ public interface Iterator<E> {
      *
      * @return
      */
-    public E getNext();
+    public E next();
     /**
      *
      * @return

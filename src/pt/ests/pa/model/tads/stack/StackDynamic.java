@@ -126,7 +126,7 @@ public class StackDynamic<E> implements Stack<E> {
         }
 
         @Override
-        public E getNext() {
+        public E next() {
             E elem = pos.getElement();
             pos = pos.getNext();
             return elem;
@@ -146,7 +146,7 @@ public class StackDynamic<E> implements Stack<E> {
     public String toString() {
         String string = "[";
         for (Iterator it = getIterator(); it.hasNext();) {
-            string += it.getNext();
+            string += it.next();
             string += (it.hasNext()) ? ", " : "";
         }
         string += "]";

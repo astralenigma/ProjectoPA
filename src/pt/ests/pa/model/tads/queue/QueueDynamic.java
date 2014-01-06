@@ -124,7 +124,7 @@ public class QueueDynamic<E> implements Queue<E> {
         }
 
         @Override
-        public E getNext() {
+        public E next() {
             E elem = pos.getElem();
             pos = pos.getNext();
             return elem;
@@ -144,7 +144,7 @@ public class QueueDynamic<E> implements Queue<E> {
     public String toString() {
         String string = "[";
         for (Iterator it = getIterator(); it.hasNext();) {
-            string += it.getNext();
+            string += it.next();
             string += (it.hasNext()) ? ", " : "";
         }
         string += "]";

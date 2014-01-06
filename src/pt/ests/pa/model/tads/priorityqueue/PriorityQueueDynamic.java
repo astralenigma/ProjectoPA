@@ -138,7 +138,7 @@ public class PriorityQueueDynamic<E extends Comparable<E>> implements PriorityQu
         }
 
         @Override
-        public E getNext() {
+        public E next() {
             E elem = pos.getElem();
             pos = pos.getNext();
             return elem;
@@ -158,7 +158,7 @@ public class PriorityQueueDynamic<E extends Comparable<E>> implements PriorityQu
     public String toString() {
         String string = "[";
         for (Iterator it = getIterator(); it.hasNext();) {
-            string += it.getNext();
+            string += it.next();
             string += (it.hasNext()) ? ", " : "";
         }
         string += "]";
