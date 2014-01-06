@@ -39,6 +39,6 @@ public class Piso {
 
     @Override
     public String toString() {
-        return String.format("%50s", passageiros);
+        return  passageiros+"";
     }
 }

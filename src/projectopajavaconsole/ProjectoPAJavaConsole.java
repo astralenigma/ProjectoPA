@@ -24,9 +24,10 @@ public class ProjectoPAJavaConsole {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws QuantidadePisosIlegalException, QuantidadeElevadoresIlegalException, CapacidadeElevadorIlegalException {
-        Predio predio=Predio.getInstance();
-        Piso piso = new Piso(5);
-        System.out.println(piso);
+        Predio predio = Predio.getInstance();
+//        Piso piso = new Piso(5);
+//        System.out.println(piso);
+        System.out.println(predio);
 //        Passageiro[] passageiros =new Passageiro[3];
 //        passageiros[0] =new Adulto(5);
 //        passageiros[1] =new Crianca(5);

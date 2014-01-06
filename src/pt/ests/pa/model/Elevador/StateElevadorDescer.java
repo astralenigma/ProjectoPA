@@ -11,7 +11,7 @@ import pt.ests.pa.model.exceptions.InvalidStateTransitionException;
  * @author Rui
  */
 public class StateElevadorDescer extends StateElevador {
-    
+
     /**
      *
      * @param elevador
@@ -19,7 +19,7 @@ public class StateElevadorDescer extends StateElevador {
     public StateElevadorDescer(Elevador elevador) {
         super(elevador);
     }
-    
+
     /**
      *
      * @throws InvalidStateTransitionException
@@ -28,7 +28,7 @@ public class StateElevadorDescer extends StateElevador {
     public void subir() throws InvalidStateTransitionException {
         throw new InvalidStateTransitionException("O elevador já se encontra em movimento.");
     }
-    
+
     /**
      *
      * @throws InvalidStateTransitionException
@@ -37,7 +37,7 @@ public class StateElevadorDescer extends StateElevador {
     public void abrirPortas() throws InvalidStateTransitionException {
         throw new InvalidStateTransitionException("O elevador encontra-se em movimento.");
     }
-    
+
     /**
      *
      * @throws InvalidStateTransitionException
@@ -46,7 +46,7 @@ public class StateElevadorDescer extends StateElevador {
     public void fecharPortas() throws InvalidStateTransitionException {
         throw new InvalidStateTransitionException("Se o elevador tem as portas abertas neste momento estamos despedidos.");
     }
-    
+
     /**
      *
      * @throws InvalidStateTransitionException
@@ -55,7 +55,7 @@ public class StateElevadorDescer extends StateElevador {
     public void descer() throws InvalidStateTransitionException {
         throw new InvalidStateTransitionException("O elevador já se encontra em movimento.");
     }
-    
+
     /**
      *
      * @throws InvalidStateTransitionException
@@ -64,7 +64,7 @@ public class StateElevadorDescer extends StateElevador {
     public void entradaSaidaDePassageiros() throws InvalidStateTransitionException {
         throw new InvalidStateTransitionException("O elevador encontra-se em movimento.");
     }
-    
+
     /**
      *
      * @throws InvalidStateTransitionException
@@ -72,5 +72,10 @@ public class StateElevadorDescer extends StateElevador {
     @Override
     public void pararElevador() throws InvalidStateTransitionException {
         getElevador().setEstado(new StateElevadorPortasFechadas(getElevador()));
+    }
+
+    @Override
+    public String toString() {
+        return "\\/"; //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -13,6 +13,7 @@ import pt.ests.pa.model.tads.arraylist.ArrayList;
 import pt.ests.pa.model.tads.arraylist.ArrayListStatic;
 
 /**
+ * Classe do predio cola todos as classes.
  *
  * @author Rui
  */
@@ -42,18 +43,17 @@ public class Predio {
         if (instance == null) {
             Scanner sc = new Scanner(System.in);
             System.out.println("Quantos Pisos tem o prédio?");
-            sc.nextLine();
             int nmrPisos = sc.nextInt();
-            if (8 > nmrPisos || nmrPisos > 14) {
+            if (7 > nmrPisos || nmrPisos > 15) {
                 throw new QuantidadePisosIlegalException();
             }
             System.out.println("Quantos Elevadores tem o prédio?");
             sc.nextLine();
             int nmrElevadores = sc.nextInt();
-            if (2 > nmrElevadores || nmrElevadores > 4) {
+            if (1 > nmrElevadores || nmrElevadores > 5) {
                 throw new QuantidadeElevadoresIlegalException();
             }
-            System.out.println("Quantos Elevadores tem o prédio?");
+            System.out.println("Qual a capacidade dos Elevadores do prédio?");
             sc.nextLine();
             int capacidadeElevador = sc.nextInt();
             if (capacidadeElevador < 1) {
@@ -66,9 +66,15 @@ public class Predio {
 
     @Override
     public String toString() {
-        String str = "";
-        for (int i = 0; i < 10; i++) {
-            str += pisos.get(i);
+        String str = "---------------------------------------------------------------------\n"
+                + "-------------------------------Predio--------------------------------\n"
+                + "---------------------------------------------------------------------\n";
+        for (int i = pisos.size() - 1; i >= 0; i--) {
+            str += String.format("%30s", pisos.get(i));
+            for (int j = 0; j < elevadores.size(); j++) {
+                str += String.format("%6s", (elevadores.get(j).getPisoActual() == i) ? elevadores.get(j) : "");
+            }
+            str += "\n";
         }
         return str; //To change body of generated methods, choose Tools | Templates.
     }

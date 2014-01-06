@@ -73,4 +73,9 @@ public class StateElevadorSubir extends StateElevador {
     public void pararElevador() throws InvalidStateTransitionException {
         getElevador().setEstado(new StateElevadorPortasFechadas(getElevador()));
     }
+
+    @Override
+    public String toString() {
+        return "/\\"; //To change body of generated methods, choose Tools | Templates.
+    }
 }

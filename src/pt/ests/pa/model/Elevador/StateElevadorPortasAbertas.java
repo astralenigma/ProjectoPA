@@ -74,4 +74,9 @@ public class StateElevadorPortasAbertas extends StateElevador {
     public void pararElevador() throws InvalidStateTransitionException {
         throw new InvalidStateTransitionException("O elevador ja se encontra parado.");
     }
+
+    @Override
+    public String toString() {
+        return "  "; //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -19,7 +19,7 @@ import pt.ests.pa.model.tads.priorityqueue.PriorityQueueDynamic;
  */
 public class Elevador {
 
-    private int piso;
+    private int pisoActual;
     private StateElevador estado;
     private PriorityQueue<Passageiro> passageiro;
     private ArrayList<Piso> pisos;
@@ -33,7 +33,7 @@ public class Elevador {
      */
     public Elevador(ArrayList<Piso> pisos, int capacidadeElevador) {
         this.pisos = pisos;
-        this.piso = 0;
+        this.pisoActual = 0;
         this.estado = new StateElevadorPortasFechadas(this);
         this.passageiro = new PriorityQueueDynamic<>(capacidadeElevador);
         tempoDeInactividade = 0;
@@ -44,7 +44,7 @@ public class Elevador {
      * Método de fazer os elevadores subir.
      */
     public void subir() {
-        piso++;
+        pisoActual++;
         nPisosPercorridos++;
     }
 
@@ -54,10 +54,10 @@ public class Elevador {
      * @throws ElevadorNoPisoZeroException
      */
     public void descer() throws ElevadorNoPisoZeroException {
-        if (piso == 0) {
+        if (pisoActual == 0) {
             throw new ElevadorNoPisoZeroException();
         }
-        piso--;
+        pisoActual--;
         nPisosPercorridos++;
     }
 
@@ -74,11 +74,15 @@ public class Elevador {
      * Recebe Passageiros dos pisos.
      */
     public void receberPassageiros() {
-        passageiro.enqueue(pisos.get(piso).enviarPassageiro());
+        passageiro.enqueue(pisos.get(pisoActual).enviarPassageiro());
+    }
+
+    public int getPisoActual() {
+        return pisoActual;
     }
 
     @Override
     public String toString() {
-        return String.format("|%2s%2s%2s|", estado, passageiro, estado);
+        return String.format("|%2s%02d%2s|", estado, passageiro.size(), estado);
     }
 }

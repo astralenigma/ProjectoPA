@@ -11,7 +11,7 @@ import pt.ests.pa.model.exceptions.InvalidStateTransitionException;
  * @author Rui
  */
 public class StateElevadorEntrandoSaindo extends StateElevador {
-    
+
     /**
      *
      * @param elevador
@@ -19,7 +19,7 @@ public class StateElevadorEntrandoSaindo extends StateElevador {
     public StateElevadorEntrandoSaindo(Elevador elevador) {
         super(elevador);
     }
-    
+
     /**
      *
      * @throws InvalidStateTransitionException
@@ -28,7 +28,7 @@ public class StateElevadorEntrandoSaindo extends StateElevador {
     public void subir() throws InvalidStateTransitionException {
         throw new InvalidStateTransitionException("Está a tentar matar alguém?");
     }
-    
+
     /**
      *
      * @throws InvalidStateTransitionException
@@ -37,7 +37,7 @@ public class StateElevadorEntrandoSaindo extends StateElevador {
     public void abrirPortas() throws InvalidStateTransitionException {
         throw new InvalidStateTransitionException("Se as portas não estão abertas como é que as pessoas estão a entrar? Queres ver que há fantasmas no prédio?");
     }
-    
+
     /**
      *
      * @throws InvalidStateTransitionException
@@ -46,7 +46,7 @@ public class StateElevadorEntrandoSaindo extends StateElevador {
     public void fecharPortas() throws InvalidStateTransitionException {
         getElevador().setEstado(new StateElevadorPortasFechadas(getElevador()));
     }
-    
+
     /**
      *
      * @throws InvalidStateTransitionException
@@ -55,7 +55,7 @@ public class StateElevadorEntrandoSaindo extends StateElevador {
     public void descer() throws InvalidStateTransitionException {
         throw new InvalidStateTransitionException("Está a tentar matar alguém?");
     }
-    
+
     /**
      *
      * @throws InvalidStateTransitionException
@@ -64,7 +64,7 @@ public class StateElevadorEntrandoSaindo extends StateElevador {
     public void entradaSaidaDePassageiros() throws InvalidStateTransitionException {
         throw new InvalidStateTransitionException("Já se encontram pessoas a sair e a entrar, não sei porque estás a chamar outra vez este estado.");
     }
-    
+
     /**
      *
      * @throws InvalidStateTransitionException
@@ -72,5 +72,10 @@ public class StateElevadorEntrandoSaindo extends StateElevador {
     @Override
     public void pararElevador() throws InvalidStateTransitionException {
         throw new InvalidStateTransitionException("Se o Elevador não está parado então as pessoas neste prédio são loucas.");
+    }
+
+    @Override
+    public String toString() {
+        return "OO"; //To change body of generated methods, choose Tools | Templates.
     }
 }
