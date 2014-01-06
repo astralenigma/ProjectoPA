@@ -71,14 +71,56 @@ public class Elevador {
     }
 
     /**
+     * Comunica o estado do Elevador
+     *
+     * @return Estado Actual do elevador
+     */
+    public StateElevador getEstado() {
+        return estado;
+    }
+
+    /**
      * Recebe Passageiros dos pisos.
      */
     public void receberPassageiros() {
-        passageiro.enqueue(pisos.get(pisoActual).enviarPassageiro());
+        //passageiro.enqueue(pisos.get(pisoActual).enviarPassageiro());
     }
 
+    /**
+     * Mostra o piso actual do Elevador.
+     *
+     * @return Piso Actual do Elevador
+     */
     public int getPisoActual() {
         return pisoActual;
+    }
+
+    /**
+     * Envia Numero de passageiros no elevador.
+     *
+     * @return Numero de passageiros no elevador
+     */
+    public int getNmrPassageiros() {
+        return passageiro.size();
+    }
+
+    /**
+     * Envia o tempo de Inactividade do elevador.
+     *
+     * @return Inteiro que representa o tempo de inactividade do elevador em
+     * segundos.
+     */
+    public int getTempoDeInactividade() {
+        return tempoDeInactividade;
+    }
+
+    /**
+     * Devolve o numero de pisos o elevador percorreu.
+     *
+     * @return Numero de pisos que o elevador percorreu.
+     */
+    public int getnPisosPercorridos() {
+        return nPisosPercorridos;
     }
 
     @Override
