@@ -6,7 +6,6 @@
 package pt.ests.pa.model.Elevador;
 
 import pt.ests.pa.model.Piso;
-import pt.ests.pa.model.exceptions.ElevadorNoPisoZeroException;
 import pt.ests.pa.model.passageiro.Passageiro;
 import pt.ests.pa.model.tads.arraylist.ArrayList;
 import pt.ests.pa.model.tads.priorityqueue.PriorityQueue;
@@ -53,10 +52,7 @@ public class Elevador {
      *
      * @throws ElevadorNoPisoZeroException
      */
-    public void descer() throws ElevadorNoPisoZeroException {
-        if (pisoActual == 0) {
-            throw new ElevadorNoPisoZeroException();
-        }
+    public void descer(){
         pisoActual--;
         nPisosPercorridos++;
     }
