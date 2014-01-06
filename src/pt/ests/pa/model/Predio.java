@@ -64,7 +64,7 @@ public class Predio {
      * @param p Passageiro a ser inserido.
      */
     public void gerarPassageiro(int nmrPiso, Passageiro p) {
-        pisos.get(nmrPiso).receberPassageiro(p);
+        pisos.get(nmrPiso).gerarPassageiros(p);
     }
 
     @Override
