@@ -5,20 +5,23 @@
 package pt.ests.pa.model.passageiro;
 
 /**
+ * Classe Concreta do factory de passageiros.
  *
  * @author Rui
  */
 public class ConcreteCreatorPassageiro extends CreatorPassageiro {
 
     /**
+     * Fábrica de passageiros
      *
-     * @param tipoDePassageiro
-     * @param nmrMaxPisos
-     * @return
-     * @throws IllegalArgumentException
+     * @param tipoDePassageiro Recebe um inteiro para decidir o tipo de
+     * passageiro.
+     * @param nmrMaxPisos Recebe o Numero de pisos do Predio.
+     * @return Passageiro Devolve um passageiro.
+     * @throws IllegalArgumentException Para precaver
      */
     @Override
-    public Passageiro factoryMethod(int tipoDePassageiro,int nmrMaxPisos) throws IllegalArgumentException {
+    public Passageiro factoryMethod(int tipoDePassageiro, int nmrMaxPisos) throws IllegalArgumentException {
         switch (tipoDePassageiro) {
             case DEFICIENTE:
                 return new Deficiente(nmrMaxPisos);
