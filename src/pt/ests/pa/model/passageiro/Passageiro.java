@@ -47,9 +47,9 @@ public class Passageiro implements Comparable<Passageiro> {
             return 1;
         }
         if (passageiro instanceof Crianca) {
-            return 1;
+            return 0;
         }
-        return 1;
+        return -1;
     }
 
     /**
@@ -82,7 +82,6 @@ public class Passageiro implements Comparable<Passageiro> {
      */
     @Override
     public int compareTo(Passageiro t) {
-
 //        Precisamos de 2 compareTos dependendo do estado do Passageiro talvez tenhamos que verificar o estado do elevador
 //        if (estado instanceof StatePassageiroEmTransporte) {
 //            return destino-origem;
