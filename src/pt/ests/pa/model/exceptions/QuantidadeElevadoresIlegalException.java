@@ -8,7 +8,7 @@ package pt.ests.pa.model.exceptions;
  *
  * @author Rui
  */
-public class QuantidadeElevadoresIlegalException extends Exception {
+public class QuantidadeElevadoresIlegalException extends RuntimeException {
 
     /**
      * Creates a new instance of

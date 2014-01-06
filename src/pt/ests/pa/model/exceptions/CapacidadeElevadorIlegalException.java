@@ -8,7 +8,7 @@ package pt.ests.pa.model.exceptions;
  *
  * @author Rui
  */
-public class CapacidadeElevadorIlegalException extends Exception {
+public class CapacidadeElevadorIlegalException extends RuntimeException {
 
     public CapacidadeElevadorIlegalException() {
     }
