@@ -10,6 +10,7 @@ import pt.ests.pa.model.tads.Iterator;
 import pt.ests.pa.model.tads.priorityqueue.PriorityQueue;
 import pt.ests.pa.model.tads.priorityqueue.PriorityQueueDynamic;
 import pt.ests.pa.model.tads.queue.Queue;
+import pt.ests.pa.model.tads.queue.QueueDynamic;
 
 /**
  * Classe dos pisos contem o numero do piso e os passageiros a espera.
@@ -32,6 +33,7 @@ public class Piso {
         this.nPiso = nPiso;
         passageirosADescer = new PriorityQueueDynamic<>();
         passageirosASubir = new PriorityQueueDynamic<>();
+        passageirosAtendidos=new QueueDynamic<>();
     }
 
     /**
