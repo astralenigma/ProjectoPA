@@ -65,4 +65,11 @@ public abstract class StateElevador {
      * @throws InvalidStateTransitionException
      */
     public abstract void pararElevador() throws InvalidStateTransitionException;
+
+    /**
+     * Apresenta o estado actual do Elevador
+     *
+     * @return Estado Actual do Elevador por palavras.
+     */
+    public abstract String palavras();
 }

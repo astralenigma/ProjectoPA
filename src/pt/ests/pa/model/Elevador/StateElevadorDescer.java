@@ -78,4 +78,10 @@ public class StateElevadorDescer extends StateElevador {
     public String toString() {
         return "\\/"; //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public String palavras() {
+        return "A Descer";
+    }
+    
 }

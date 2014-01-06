@@ -76,6 +76,12 @@ public class StateElevadorEntrandoSaindo extends StateElevador {
 
     @Override
     public String toString() {
-        return "OO"; //To change body of generated methods, choose Tools | Templates.
+        return "OO"; 
     }
+
+    @Override
+    public String palavras() {
+        return "Passageiros A Entrar\\Sair";
+    }
+    
 }

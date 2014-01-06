@@ -76,6 +76,12 @@ public class StateElevadorPortasFechadas extends StateElevador {
 
     @Override
     public String toString() {
-        return "||"; //To change body of generated methods, choose Tools | Templates.
+        return "||";
     }
+
+    @Override
+    public String palavras() {
+        return "Parado";
+    }
+    
 }
