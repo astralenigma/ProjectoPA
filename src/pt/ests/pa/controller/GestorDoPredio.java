@@ -17,7 +17,7 @@ public class GestorDoPredio {
     private int nmrPisos = 8;
     private int nmrElevadores = 2;
     private int capacidadeElevador = 10;
-    private ConcreteCreatorPassageiro ccp;
+    private ConcreteCreatorPassageiro ccp =new ConcreteCreatorPassageiro();
 //    public static void criarPredio() throws QuantidadePisosIlegalException, QuantidadeElevadoresIlegalException, CapacidadeElevadorIlegalException {
 //        //doSomething
 //        Scanner sc = new Scanner(System.in);
@@ -44,7 +44,7 @@ public class GestorDoPredio {
     public void criarPassageiros() {
         Random rd = new Random();
         if (rd.nextBoolean()) {
-            Passageiro p= ccp.factoryMethod(rd.nextInt()%3, nmrPisos);
+            Passageiro p= ccp.factoryMethod((rd.nextInt()%3)+1, nmrPisos);
             Predio.getInstance().gerarPassageiro(p.getOrigem(), p);
         }
     }
