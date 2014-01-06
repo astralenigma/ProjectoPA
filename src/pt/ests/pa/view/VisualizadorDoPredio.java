@@ -15,7 +15,7 @@ import pt.ests.pa.model.exceptions.QuantidadePisosIlegalException;
  */
 public class VisualizadorDoPredio {
 
-    public static void imprimirPredio() {
+    public void imprimirPredio() {
         try {
             System.out.println(Predio.getInstance());
         } catch (QuantidadePisosIlegalException ex) {
