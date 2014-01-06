@@ -5,10 +5,10 @@
 package pt.ests.pa.model;
 
 import pt.ests.pa.model.exceptions.CapacidadeElevadorIlegalException;
-import java.util.Scanner;
 import pt.ests.pa.model.Elevador.Elevador;
 import pt.ests.pa.model.exceptions.QuantidadeElevadoresIlegalException;
 import pt.ests.pa.model.exceptions.QuantidadePisosIlegalException;
+import pt.ests.pa.model.passageiro.Passageiro;
 import pt.ests.pa.model.tads.arraylist.ArrayList;
 import pt.ests.pa.model.tads.arraylist.ArrayListStatic;
 
@@ -41,27 +41,30 @@ public class Predio {
      */
     public static Predio getInstance() throws QuantidadePisosIlegalException, QuantidadeElevadoresIlegalException, CapacidadeElevadorIlegalException {
         if (instance == null) {
-            Scanner sc = new Scanner(System.in);
-            System.out.println("Quantos Pisos tem o prédio?");
-            int nmrPisos = sc.nextInt();
-            if (7 > nmrPisos || nmrPisos > 15) {
-                throw new QuantidadePisosIlegalException();
-            }
-            System.out.println("Quantos Elevadores tem o prédio?");
-            sc.nextLine();
-            int nmrElevadores = sc.nextInt();
-            if (1 > nmrElevadores || nmrElevadores > 5) {
-                throw new QuantidadeElevadoresIlegalException();
-            }
-            System.out.println("Qual a capacidade dos Elevadores do prédio?");
-            sc.nextLine();
-            int capacidadeElevador = sc.nextInt();
-            if (capacidadeElevador < 1) {
-                throw new CapacidadeElevadorIlegalException();
-            }
+            int nmrPisos = 8;
+            int nmrElevadores = 2;
+            int capacidadeElevador = 10;
             instance = new Predio(nmrPisos, nmrElevadores, capacidadeElevador);
         }
         return instance;
+    }
+
+    /**
+     * Devolve o nmr maximo de pisos.
+     *
+     * @return Inteiro com o tamanho do prédio
+     */
+    public int getMaxPisos() {
+        return pisos.size();
+    }
+
+    /**
+     * Insere um passageiro no seu piso de origem.
+     * @param nmrPiso Numero do piso onde o passageiro tem origem.
+     * @param p Passageiro a ser inserido.
+     */
+    public void gerarPassageiro(int nmrPiso, Passageiro p) {
+        pisos.get(nmrPiso).receberPassageiro(p);
     }
 
     @Override
@@ -76,6 +79,12 @@ public class Predio {
             }
             str += "\n";
         }
-        return str; //To change body of generated methods, choose Tools | Templates.
+        for (int i = 0; i < elevadores.size(); i++) {
+            System.out.println("Numero do elevador: " + (i + 1));
+            System.out.println("Numero de passageiros no elevador: " + elevadores.get(i).getNmrPassageiros());
+            System.out.println("Estado do Elevador: " + elevadores.get(i).getEstado().palavras());
+            System.out.println("Distancia Percorrida: " + elevadores.get(i).getnPisosPercorridos());
+        }
+        return str;
     }
 }
