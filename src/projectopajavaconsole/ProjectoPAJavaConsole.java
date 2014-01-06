@@ -4,15 +4,8 @@
  */
 package projectopajavaconsole;
 
-import pt.ests.pa.model.exceptions.CapacidadeElevadorIlegalException;
-import pt.ests.pa.model.Piso;
-import pt.ests.pa.model.Predio;
-import pt.ests.pa.model.exceptions.QuantidadeElevadoresIlegalException;
-import pt.ests.pa.model.exceptions.QuantidadePisosIlegalException;
-import pt.ests.pa.model.passageiro.Adulto;
-import pt.ests.pa.model.passageiro.Crianca;
-import pt.ests.pa.model.passageiro.Deficiente;
-import pt.ests.pa.model.passageiro.Passageiro;
+import pt.ests.pa.controller.GestorDoPredio;
+import pt.ests.pa.view.VisualizadorDoPredio;
 
 /**
  *
@@ -23,11 +16,21 @@ public class ProjectoPAJavaConsole {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws QuantidadePisosIlegalException, QuantidadeElevadoresIlegalException, CapacidadeElevadorIlegalException {
-        Predio predio = Predio.getInstance();
+    public static void main(String[] args) {
+
+        VisualizadorDoPredio vdp = new VisualizadorDoPredio();
+        GestorDoPredio gdp = new GestorDoPredio();
+        while (true) {
+            vdp.imprimirPredio();
+            gdp.criarPassageiros();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+                Thread.currentThread().interrupt();
+            }
+        }
 //        Piso piso = new Piso(5);
 //        System.out.println(piso);
-        System.out.println(predio);
 //        Passageiro[] passageiros =new Passageiro[3];
 //        passageiros[0] =new Adulto(5);
 //        passageiros[1] =new Crianca(5);
