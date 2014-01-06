@@ -19,10 +19,6 @@ public class Deficiente extends Passageiro {
         super(nmrMaxPisos);
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
     public String toString() {
         return "D(" + getOrigem() + "," + getDestino() + ")";
