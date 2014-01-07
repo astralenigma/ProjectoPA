@@ -4,13 +4,14 @@
  */
 package pt.ests.pa.model;
 
+import pt.ests.pa.controller.GestorDoPredio;
 import pt.ests.pa.model.exceptions.CapacidadeElevadorIlegalException;
 import pt.ests.pa.model.Elevador.Elevador;
 import pt.ests.pa.model.exceptions.QuantidadeElevadoresIlegalException;
 import pt.ests.pa.model.exceptions.QuantidadePisosIlegalException;
 import pt.ests.pa.model.passageiro.Passageiro;
 import pt.ests.pa.model.tads.arraylist.ArrayList;
-import pt.ests.pa.model.tads.arraylist.ArrayListStatic;
+import pt.ests.pa.model.tads.arraylist.ArrayListDNode;
 
 /**
  * Classe do predio cola todos as classes.
@@ -23,15 +24,19 @@ public class Predio {
     private ArrayList<Piso> pisos;
     private ArrayList<Elevador> elevadores;
 
-    private Predio(int nmrPisos, int nmrElevadores, int capacidadeElevador) {
-        pisos = new ArrayListStatic<>(nmrPisos);
-        for (int i = 0; i < nmrPisos; i++) {
+    private Predio() {
+        pisos = new ArrayListDNode<>();
+        for (int i = 0; i < GestorDoPredio.getNmrPisos(); i++) {
             pisos.add(i, new Piso(i));
         }
-        elevadores = new ArrayListStatic<>(nmrElevadores);
-        for (int i = 0; i < nmrElevadores; i++) {
-            elevadores.add(i, new Elevador(pisos, capacidadeElevador));
+        elevadores = new ArrayListDNode<>();
+        for (int i = 0; i < GestorDoPredio.getNmrElevadores(); i++) {
+            elevadores.add(i, new Elevador(pisos, GestorDoPredio.getCapacidadeElevador()));
         }
+    }
+
+    public ArrayList<Elevador> getElevadores() {
+        return elevadores;
     }
 
     /**
@@ -41,10 +46,7 @@ public class Predio {
      */
     public static Predio getInstance() throws QuantidadePisosIlegalException, QuantidadeElevadoresIlegalException, CapacidadeElevadorIlegalException {
         if (instance == null) {
-            int nmrPisos = 8;
-            int nmrElevadores = 2;
-            int capacidadeElevador = 10;
-            instance = new Predio(nmrPisos, nmrElevadores, capacidadeElevador);
+            instance = new Predio();
         }
         return instance;
     }
@@ -60,6 +62,7 @@ public class Predio {
 
     /**
      * Insere um passageiro no seu piso de origem.
+     *
      * @param nmrPiso Numero do piso onde o passageiro tem origem.
      * @param p Passageiro a ser inserido.
      */
@@ -73,7 +76,7 @@ public class Predio {
                 + "-------------------------------Predio--------------------------------\n"
                 + "---------------------------------------------------------------------\n";
         for (int i = pisos.size() - 1; i >= 0; i--) {
-            str += String.format("%30s", pisos.get(i));
+            str += String.format("%02d", i) + String.format("%30s|", pisos.get(i));
             for (int j = 0; j < elevadores.size(); j++) {
                 str += String.format("%6s", (elevadores.get(j).getPisoActual() == i) ? elevadores.get(j) : "");
             }
@@ -86,5 +89,13 @@ public class Predio {
             System.out.println("Distancia Percorrida: " + elevadores.get(i).getnPisosPercorridos());
         }
         return str;
+    }
+
+    public Elevador elevadorMaisProximo(int pisoActual) {
+        Elevador maisProximo = elevadores.get(0);
+        for (int i = 1; i < elevadores.size(); i++) {
+            maisProximo = (elevadores.get(i).verificarProximidade(pisoActual) > maisProximo.verificarProximidade(pisoActual)) ? elevadores.get(i) : maisProximo;
+        }
+        return maisProximo;
     }
 }
