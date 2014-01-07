@@ -44,7 +44,8 @@ public class GestorDoPredio {
     public void criarPassageiros() {
         Random rd = new Random();
         if (rd.nextBoolean()) {
-            Passageiro p= ccp.factoryMethod((rd.nextInt()%3)+1, nmrPisos);
+            int tipoPassageiro=rd.nextInt()%3;
+            Passageiro p= ccp.factoryMethod(tipoPassageiro, nmrPisos);
             Predio.getInstance().gerarPassageiro(p.getOrigem(), p);
         }
     }
