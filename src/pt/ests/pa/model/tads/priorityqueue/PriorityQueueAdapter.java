@@ -131,12 +131,11 @@ public class PriorityQueueAdapter<E extends Comparable<E>> implements PriorityQu
      */
     @Override
     public String toString() {
-        String string = "[";
+        String string = "";
         for (Iterator it = getIterator(); it.hasNext();) {
             string += it.next();
             string += (it.hasNext()) ? ", " : "";
         }
-        string += "]";
-        return string; //To change body of generated methods, choose Tools | Templates.
+        return string; 
     }
 }
