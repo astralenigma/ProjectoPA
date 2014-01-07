@@ -5,6 +5,9 @@
  */
 package pt.ests.pa.model.Elevador;
 
+import java.util.Observable;
+import java.util.Observer;
+import pt.ests.pa.controller.GestorDoPredio;
 import pt.ests.pa.model.Piso;
 import pt.ests.pa.model.passageiro.Passageiro;
 import pt.ests.pa.model.tads.arraylist.ArrayList;
@@ -16,7 +19,7 @@ import pt.ests.pa.model.tads.priorityqueue.PriorityQueueDynamic;
  *
  * @author Rui
  */
-public class Elevador {
+public class Elevador implements Observer {
 
     private int pisoActual;
     private StateElevador estado;
@@ -26,9 +29,11 @@ public class Elevador {
     private int tempoDeInactividade;
 
     /**
+     *
      * Constructor do Elevador.
      *
      * @param pisos Lista dos pisos do prédio.
+     * @param capacidadeElevador
      */
     public Elevador(ArrayList<Piso> pisos, int capacidadeElevador) {
         this.pisos = pisos;
@@ -52,7 +57,7 @@ public class Elevador {
      *
      * @throws ElevadorNoPisoZeroException
      */
-    public void descer(){
+    public void descer() {
         pisoActual--;
         nPisosPercorridos++;
     }
@@ -122,5 +127,15 @@ public class Elevador {
     @Override
     public String toString() {
         return String.format("|%2s%02d%2s|", estado, passageiro.size(), estado);
+    }
+
+    @Override
+    public void update(Observable o, Object o1) {
+        if (o instanceof GestorDoPredio) {
+        }
+    }
+
+    public int verificarProximidade(int piso) {
+        return (piso > pisoActual) ? piso - pisoActual : pisoActual - piso;
     }
 }
