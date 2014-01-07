@@ -17,9 +17,9 @@ public class ProjectoPAJavaConsole {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
-        VisualizadorDoPredio vdp = new VisualizadorDoPredio();
         GestorDoPredio gdp = new GestorDoPredio();
+        gdp.criarPredio();
+        VisualizadorDoPredio vdp = new VisualizadorDoPredio();
         while (true) {
             vdp.imprimirPredio();
             gdp.criarPassageiros();
