@@ -23,14 +23,12 @@ public class ConcreteCreatorPassageiro extends CreatorPassageiro {
     @Override
     public Passageiro factoryMethod(int tipoDePassageiro, int nmrMaxPisos) throws IllegalArgumentException {
         switch (tipoDePassageiro) {
-            case DEFICIENTE:
+            default:
                 return new Deficiente(nmrMaxPisos);
             case CRIANCA:
                 return new Crianca(nmrMaxPisos);
             case ADULTO:
                 return new Adulto(nmrMaxPisos);
-            default:
-                throw new IllegalArgumentException("Erro");
         }
     }
 }
