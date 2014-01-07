@@ -13,15 +13,15 @@ public abstract class CreatorPassageiro {
     /**
      *
      */
-    public static final int DEFICIENTE = 1;
+    public static final int DEFICIENTE = 0;
     /**
      *
      */
-    public static final int CRIANCA = 2;
+    public static final int CRIANCA = 1;
     /**
      *
      */
-    public static final int ADULTO = 3;
+    public static final int ADULTO = 2;
 
     /**
      *
