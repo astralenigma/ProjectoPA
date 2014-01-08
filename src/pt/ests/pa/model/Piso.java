@@ -39,14 +39,21 @@ public class Piso {
     /**
      * Método usado para enviar os passageiros para o elevador.
      *
-     * @param aSubir O elevador esta a subir?
+     * @param pisoDestino o destino do elevador
      * @return Passageiro que vai entrar no elevador.
      */
-    public Passageiro enviarPassageiro(boolean aSubir) {
-        if (aSubir) {
-            return passageirosASubir.dequeue();
+    public Passageiro enviarPassageiro(int pisoDestino) {
+        if (pisoDestino==nPiso) {
+            if (!passageirosASubir.isEmpty()) {
+                return passageirosADescer.dequeue();
+            }else{
+                return passageirosASubir.dequeue();
+            }
+        }
+        if (pisoDestino>nPiso) {
+            return passageirosASubir.dequeue().aEntrar();
         } else {
-            return passageirosADescer.dequeue();
+            return passageirosADescer.dequeue().aEntrar();
         }
     }
 
