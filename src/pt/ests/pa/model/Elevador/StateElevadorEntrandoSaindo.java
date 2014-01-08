@@ -76,12 +76,18 @@ public class StateElevadorEntrandoSaindo extends StateElevador {
 
     @Override
     public String toString() {
-        return "OO"; 
+        return "OO";
     }
 
     @Override
     public String palavras() {
         return "Passageiros A Entrar\\Sair";
     }
-    
+
+    @Override
+    public void actualizar() {
+        getElevador().largarPassageiros();
+        getElevador().receberPassageiros();
+        fecharPortas();
+    }
 }

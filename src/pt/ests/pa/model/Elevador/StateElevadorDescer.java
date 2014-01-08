@@ -54,4 +54,13 @@ public class StateElevadorDescer extends StateElevador {
     public String palavras() {
         return "A Descer";
     }
+
+    @Override
+    public void actualizar() {
+        if (getElevador().getnumPisoActual() < getElevador().getPisoDestino()) {
+            getElevador().descer();
+        } else if (getElevador().getnumPisoActual() == getElevador().getPisoDestino()) {
+            pararElevador();
+        }
+    }
 }

@@ -84,5 +84,16 @@ public class StateElevadorPortasAbertas extends StateElevador {
     public String palavras() {
         return "Com as Portas Abertas";
     }
+
+    @Override
+    public void actualizar() {
+        //se existem pessoas para entrar ou sair mudar para o estado sairentrar
+        if (!getElevador().isEmpty()&&getElevador().getPisoActual().existemPassageiros()) {
+            entradaSaidaDePassageiros();
+        } else {
+            fecharPortas();
+        }
+        //cc fecharportas
+    }
     
 }

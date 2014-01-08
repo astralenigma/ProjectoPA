@@ -83,5 +83,21 @@ public class StateElevadorPortasFechadas extends StateElevador {
     public String palavras() {
         return "Parado";
     }
-    
+
+    @Override
+    public void actualizar() {
+
+        if (true) {//se ha destino
+            if (getElevador().getnumPisoActual() == getElevador().getPisoDestino()) {
+                abrirPortas();
+            } else if (getElevador().getnumPisoActual() < getElevador().getPisoDestino()) {
+                subir();
+            } else if (getElevador().getnumPisoActual() > getElevador().getPisoDestino()) {
+                descer();
+            } else {
+                getElevador().incrementarInactividade();
+            }
+        }
+    }
 }
+
