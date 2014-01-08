@@ -57,7 +57,7 @@ public class StateElevadorDescer extends StateElevador {
 
     @Override
     public void actualizar() {
-        if (getElevador().getnumPisoActual() < getElevador().getPisoDestino()) {
+        if (getElevador().getnumPisoActual() > getElevador().getPisoDestino()) {
             getElevador().descer();
         } else if (getElevador().getnumPisoActual() == getElevador().getPisoDestino()) {
             pararElevador();

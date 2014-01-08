@@ -22,7 +22,6 @@ public class Piso {
     private PriorityQueue<Passageiro> passageirosASubir;
     private PriorityQueue<Passageiro> passageirosADescer;
     private Queue<Passageiro> passageirosAtendidos;
-    private boolean estaAtendido;
 
     /**
      * Constructor do piso recebe o numero do piso e gera a fila de passageiros.
@@ -34,7 +33,6 @@ public class Piso {
         passageirosADescer = new PriorityQueueDynamic<>();
         passageirosASubir = new PriorityQueueDynamic<>();
         passageirosAtendidos = new QueueDynamic<>();
-        estaAtendido=false;
     }
 
     /**
@@ -46,9 +44,9 @@ public class Piso {
     public Passageiro enviarPassageiro(int pisoDestino) {
         if (pisoDestino == nPiso) {
             if (!passageirosASubir.isEmpty()) {
-                return passageirosADescer.dequeue();
-            } else {
                 return passageirosASubir.dequeue();
+            } else {
+                return passageirosADescer.dequeue();
             }
         }
         if (pisoDestino > nPiso) {
@@ -58,7 +56,12 @@ public class Piso {
         }
     }
 
-    public boolean existemPassageiros() {
+    public boolean existemPassageiros(int direccao) {
+        if (direccao>0) {
+            return existePassageiroSubir();
+        } if (direccao<0) {
+            return existePassageiroDescer();
+        }
         return (existePassageiroDescer() || existePassageiroSubir());
     }
 

@@ -87,13 +87,11 @@ public class StateElevadorPortasAbertas extends StateElevador {
 
     @Override
     public void actualizar() {
-        //se existem pessoas para entrar ou sair mudar para o estado sairentrar
-        if (!getElevador().isEmpty()||getElevador().getPisoActual().existemPassageiros()) {
+        if (!getElevador().isEmpty()||getElevador().getPisoActual().existemPassageiros(getElevador().getPisoDestino()-getElevador().getnumPisoActual())) {
             entradaSaidaDePassageiros();
         } else {
             fecharPortas();
         }
-        //cc fecharportas
     }
     
 }

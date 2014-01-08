@@ -4,48 +4,59 @@
  */
 package pt.ests.pa.model;
 
-import pt.ests.pa.controller.GestorDoPredio;
+import java.util.Observable;
+import java.util.Random;
 import pt.ests.pa.model.Elevador.Elevador;
+import pt.ests.pa.model.passageiro.ConcreteCreatorPassageiro;
 import pt.ests.pa.model.passageiro.Passageiro;
 import pt.ests.pa.model.tads.arraylist.ArrayList;
 import pt.ests.pa.model.tads.arraylist.ArrayListDNode;
+import pt.ests.pa.model.tads.queue.Queue;
+import pt.ests.pa.model.tads.queue.QueueDynamic;
 
 /**
  * Classe do predio cola todos as classes.
  *
  * @author Rui
  */
-public class Predio {
+public class Predio extends Observable {
 
-    private static Predio instance;
+    //private static Predio instance;
     private ArrayList<Piso> pisos;
     private ArrayList<Elevador> elevadores;
+    private ConcreteCreatorPassageiro ccp = new ConcreteCreatorPassageiro();
+    private int nmrPisos;
+    private int nmrElevadores;
+    private int capacidadeElevador;
 
-    private Predio() {
+    public Predio(int nmrPisos, int nmrElevadores, int capacidadeElevador) {
+        this.nmrPisos = nmrPisos;
+        this.nmrElevadores = nmrElevadores;
+        this.capacidadeElevador = capacidadeElevador;
+
         pisos = new ArrayListDNode<>();
-        for (int i = 0; i < GestorDoPredio.getNmrPisos(); i++) {
+        for (int i = 0; i < nmrPisos; i++) {
             pisos.add(i, new Piso(i));
         }
         elevadores = new ArrayListDNode<>();
-        for (int i = 0; i < GestorDoPredio.getNmrElevadores(); i++) {
-            elevadores.add(i, new Elevador(pisos, GestorDoPredio.getCapacidadeElevador()));
+        for (int i = 0; i < nmrElevadores; i++) {
+            elevadores.add(i, new Elevador(pisos, capacidadeElevador));
         }
+    }
+
+    public void simulaIteracao() {
+
+        criarPassageiros();
+        atualizarElevadores();
+
+        //atualizarEstatisticas();
+
+        setChanged();
+        notifyObservers();
     }
 
     public ArrayList<Elevador> getElevadores() {
         return elevadores;
-    }
-
-    /**
-     *
-     * @return @throws QuantidadePisosIlegalException
-     * @throws QuantidadeElevadoresIlegalException
-     */
-    public static Predio getInstance(){
-        if (instance == null) {
-            instance = new Predio();
-        }
-        return instance;
     }
 
     /**
@@ -58,6 +69,18 @@ public class Predio {
     }
 
     /**
+     * Método que cria os passageiros.
+     */
+    private void criarPassageiros() {
+        Random rd = new Random();
+        if (rd.nextBoolean()) {
+            notifyObservers();
+            Passageiro p = ccp.factoryMethod(rd.nextInt(3), nmrPisos);
+            gerarPassageiro(p.getOrigem(), p);
+        }
+    }
+
+    /**
      * Insere um passageiro no seu piso de origem.
      *
      * @param nmrPiso Numero do piso onde o passageiro tem origem.
@@ -65,6 +88,11 @@ public class Predio {
      */
     public void gerarPassageiro(int nmrPiso, Passageiro p) {
         pisos.get(nmrPiso).gerarPassageiros(p);
+        Queue<Elevador> queue=listaElevadoresDisponiveis(p.getDestino() - p.getOrigem());
+        if (!queue.isEmpty()) {
+            elevadorMaisProximo(nmrPiso, queue).alterarDestino(nmrPiso);
+        }
+        
     }
 
     @Override
@@ -75,24 +103,72 @@ public class Predio {
         for (int i = pisos.size() - 1; i >= 0; i--) {
             str += String.format("%02d", i) + String.format("%30s|", pisos.get(i));
             for (int j = 0; j < elevadores.size(); j++) {
-                str += String.format("%6s", (elevadores.get(j).getPisoActual() == i) ? elevadores.get(j) : "");
+                str += String.format("%6s", (elevadores.get(j).getnumPisoActual() == i) ? elevadores.get(j) : "");
             }
             str += "\n";
         }
         for (int i = 0; i < elevadores.size(); i++) {
-            System.out.println("Numero do elevador: " + (i + 1));
-            System.out.println("Numero de passageiros no elevador: " + elevadores.get(i).getNmrPassageiros());
-            System.out.println("Estado do Elevador: " + elevadores.get(i).getEstado().palavras());
-            System.out.println("Distancia Percorrida: " + elevadores.get(i).getnPisosPercorridos());
+            str += ("Numero do elevador: " + (i + 1) + "\n");
+            str += ("Numero de passageiros no elevador: " + elevadores.get(i).getNmrPassageiros() + "\n");
+            str += ("Estado do Elevador: " + elevadores.get(i).getEstado().palavras() + "\n");
+            str += ("Distancia Percorrida: " + elevadores.get(i).getnPisosPercorridos() + "\n");
         }
         return str;
     }
 
-    public Elevador elevadorMaisProximo(int pisoActual) {
-        Elevador maisProximo = elevadores.get(0);
-        for (int i = 1; i < elevadores.size(); i++) {
-            maisProximo = (elevadores.get(i).verificarProximo(pisoActual) > maisProximo.verificarProximo(pisoActual)) ? elevadores.get(i) : maisProximo;
+    public Elevador elevadorMaisProximo(int pisoActual, Queue<Elevador> elevadores) {
+        Elevador maisProximo = elevadores.dequeue();
+        for (int i = 1; !elevadores.isEmpty(); i++) {
+            maisProximo = (elevadores.peek().verificarProximo(pisoActual) > maisProximo.verificarProximo(pisoActual)) ? elevadores.peek() : maisProximo;
+            elevadores.dequeue();
         }
         return maisProximo;
+    }
+
+    public ArrayList<Piso> getPisos() {
+        return pisos;
+    }
+
+    public int getNmrPisos() {
+        return nmrPisos;
+    }
+
+    public int getNmrElevadores() {
+        return nmrElevadores;
+    }
+
+    public int getCapacidadeElevador() {
+        return capacidadeElevador;
+    }
+
+    private void atualizarElevadores() {
+        for (int i = 0; i < nmrElevadores; i++) {
+            elevadores.get(i).atualizar();
+        }
+    }
+
+    private Queue<Elevador> listaElevadoresDisponiveis(int direcao) {
+        Queue<Elevador> listaElevadores = new QueueDynamic<>();
+        if (direcao > 0) {
+            for (int i = 0; i < nmrElevadores; i++) {
+                Elevador elevador = elevadores.get(i);
+                if (elevador.getnumPisoActual() >= elevador.getPisoDestino()) {
+                    listaElevadores.enqueue(elevadores.get(i));
+                }
+
+            }
+        } else {
+            for (int i = 0; i < nmrElevadores; i++) {
+                Elevador elevador = elevadores.get(i);
+                if (elevador.getnumPisoActual() <= elevador.getPisoDestino()) {
+                    listaElevadores.enqueue(elevadores.get(i));
+                }
+            }
+        }
+        return listaElevadores;
+    }
+
+    private void atualizarEstatisticas() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
