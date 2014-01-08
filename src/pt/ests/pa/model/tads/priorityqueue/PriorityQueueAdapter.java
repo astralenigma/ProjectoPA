@@ -9,7 +9,6 @@ import pt.ests.pa.model.exceptions.EmptyPriorityQueueException;
 import pt.ests.pa.model.tads.Iterator;
 import pt.ests.pa.model.tads.arraylist.ArrayList;
 import pt.ests.pa.model.tads.arraylist.ArrayListDNode;
-import pt.ests.pa.model.exceptions.FullArrayListException;
 
 /**
  *
