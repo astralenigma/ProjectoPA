@@ -55,8 +55,7 @@ public class GestorDoPredio extends Observable {
         Random rd = new Random();
         if (rd.nextBoolean()) {
             notifyObservers();
-            int tipoPassageiro = rd.nextInt() % 3;
-            Passageiro p = ccp.factoryMethod(tipoPassageiro, nmrPisos);
+            Passageiro p = ccp.factoryMethod(rd.nextInt(3), nmrPisos);
             Predio.getInstance().gerarPassageiro(p.getOrigem(), p);
         }
     }
