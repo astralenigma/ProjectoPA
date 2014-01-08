@@ -27,6 +27,7 @@ public class Elevador implements Observer {
     private ArrayList<Piso> pisos;
     private int nPisosPercorridos;
     private int tempoDeInactividade;
+    private int destino;
 
     /**
      *
@@ -42,22 +43,34 @@ public class Elevador implements Observer {
         this.passageiro = new PriorityQueueDynamic<>(capacidadeElevador);
         tempoDeInactividade = 0;
         nPisosPercorridos = 0;
+        destino = 0;
     }
 
     /**
      * Método de fazer os elevadores subir.
      */
     public void subir() {
+        getEstado().subir();
         pisoActual++;
         nPisosPercorridos++;
     }
 
     /**
+     * Método da verificacao se a capacidade do elevador foi atingida.
+     *
+     * @return True se o elevador esta cheio, False se a capacidade do elevador
+     * ainda nao foi atingida
+     */
+    public boolean isFull() {
+        return passageiro.size() > GestorDoPredio.getCapacidadeElevador();
+    }
+
+    /**
      * Método de fazer os elevadores descer.
      *
-     * @throws ElevadorNoPisoZeroException
      */
     public void descer() {
+        getEstado().descer();
         pisoActual--;
         nPisosPercorridos++;
     }
@@ -80,11 +93,8 @@ public class Elevador implements Observer {
         return estado;
     }
 
-    /**
-     * Recebe Passageiros dos pisos.
-     */
-    public void receberPassageiros() {
-        //passageiro.enqueue(pisos.get(pisoActual).enviarPassageiro());
+    public boolean elevadorEstaASubir() {
+        return destino > pisoActual;
     }
 
     /**
@@ -124,6 +134,62 @@ public class Elevador implements Observer {
         return nPisosPercorridos;
     }
 
+    public void entrarPassageiros() {
+        getEstado().entradaSaidaDePassageiros();
+        receberPassageiros();
+    }
+
+    /**
+     * Recebe Passageiros dos pisos.
+     */
+    public void receberPassageiros() {
+        if (elevadorEstaASubir()) {
+            while (pisos.get(pisoActual).existePassageiroSubir()&&!isFull()) {
+                passageiro.enqueue(pisos.get(pisoActual).enviarPassageiro(elevadorEstaASubir()));
+            }
+        }else{
+            while (pisos.get(pisoActual).existePassageiroDescer()&&!isFull()) {
+                passageiro.enqueue(pisos.get(pisoActual).enviarPassageiro(elevadorEstaASubir()));
+            }
+        }
+        if (!passageiro.isEmpty()) {
+            alterarDestino(passageiro.peek().getDestino());
+        }
+    }
+
+    public void alterarDestino(int novoDestino) {
+        destino = novoDestino;
+    }
+
+    public void locomoverElevador() {
+        if (pisoActual != passageiro.peek().getDestino()) {
+            if (pisoActual < passageiro.peek().getDestino()) {
+                subir();
+            }
+            if (pisoActual > passageiro.peek().getDestino()) {
+                descer();
+            }
+        } else {
+            parar();
+        }
+    }
+
+    public void parar() {
+        getEstado().pararElevador();
+    }
+
+    public void elevadorAAgir() {
+        //verificacoes
+        alterarDestino(1337);
+        //accoes
+        
+    }
+    public void accaoDoElevador(){
+        
+    }
+    public void elevadorAbrirFecharPortas(){
+        
+    }
     @Override
     public String toString() {
         return String.format("|%2s%02d%2s|", estado, passageiro.size(), estado);
@@ -135,7 +201,7 @@ public class Elevador implements Observer {
         }
     }
 
-    public int verificarProximidade(int piso) {
+    public int verificarProximo(int piso) {
         return (piso > pisoActual) ? piso - pisoActual : pisoActual - piso;
     }
 }
