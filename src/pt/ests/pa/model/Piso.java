@@ -4,7 +4,6 @@
  */
 package pt.ests.pa.model;
 
-
 import pt.ests.pa.model.passageiro.Passageiro;
 import pt.ests.pa.model.tads.Iterator;
 import pt.ests.pa.model.tads.priorityqueue.PriorityQueue;
@@ -23,6 +22,7 @@ public class Piso {
     private PriorityQueue<Passageiro> passageirosASubir;
     private PriorityQueue<Passageiro> passageirosADescer;
     private Queue<Passageiro> passageirosAtendidos;
+    private boolean estaAtendido;
 
     /**
      * Constructor do piso recebe o numero do piso e gera a fila de passageiros.
@@ -33,7 +33,8 @@ public class Piso {
         this.nPiso = nPiso;
         passageirosADescer = new PriorityQueueDynamic<>();
         passageirosASubir = new PriorityQueueDynamic<>();
-        passageirosAtendidos=new QueueDynamic<>();
+        passageirosAtendidos = new QueueDynamic<>();
+        estaAtendido=false;
     }
 
     /**
@@ -43,18 +44,22 @@ public class Piso {
      * @return Passageiro que vai entrar no elevador.
      */
     public Passageiro enviarPassageiro(int pisoDestino) {
-        if (pisoDestino==nPiso) {
+        if (pisoDestino == nPiso) {
             if (!passageirosASubir.isEmpty()) {
                 return passageirosADescer.dequeue();
-            }else{
+            } else {
                 return passageirosASubir.dequeue();
             }
         }
-        if (pisoDestino>nPiso) {
+        if (pisoDestino > nPiso) {
             return passageirosASubir.dequeue().aEntrar();
         } else {
             return passageirosADescer.dequeue().aEntrar();
         }
+    }
+
+    public boolean existemPassageiros() {
+        return (existePassageiroDescer() || existePassageiroSubir());
     }
 
     /**
@@ -99,15 +104,15 @@ public class Piso {
 
     @Override
     public String toString() {
-        PriorityQueue<Passageiro> passsageiros= new PriorityQueueDynamic<>();
-        Iterator<Passageiro> it=passageirosADescer.getIterator();
+        PriorityQueue<Passageiro> passsageiros = new PriorityQueueDynamic<>();
+        Iterator<Passageiro> it = passageirosADescer.getIterator();
         while (it.hasNext()) {
             passsageiros.enqueue(it.next());
         }
-        it=passageirosASubir.getIterator();
+        it = passageirosASubir.getIterator();
         while (it.hasNext()) {
             passsageiros.enqueue(it.next());
         }
-        return  passsageiros+ "";
+        return passsageiros + "";
     }
 }
