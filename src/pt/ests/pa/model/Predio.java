@@ -5,10 +5,7 @@
 package pt.ests.pa.model;
 
 import pt.ests.pa.controller.GestorDoPredio;
-import pt.ests.pa.model.exceptions.CapacidadeElevadorIlegalException;
 import pt.ests.pa.model.Elevador.Elevador;
-import pt.ests.pa.model.exceptions.QuantidadeElevadoresIlegalException;
-import pt.ests.pa.model.exceptions.QuantidadePisosIlegalException;
 import pt.ests.pa.model.passageiro.Passageiro;
 import pt.ests.pa.model.tads.arraylist.ArrayList;
 import pt.ests.pa.model.tads.arraylist.ArrayListDNode;
@@ -44,7 +41,7 @@ public class Predio {
      * @return @throws QuantidadePisosIlegalException
      * @throws QuantidadeElevadoresIlegalException
      */
-    public static Predio getInstance() throws QuantidadePisosIlegalException, QuantidadeElevadoresIlegalException, CapacidadeElevadorIlegalException {
+    public static Predio getInstance(){
         if (instance == null) {
             instance = new Predio();
         }
@@ -94,7 +91,7 @@ public class Predio {
     public Elevador elevadorMaisProximo(int pisoActual) {
         Elevador maisProximo = elevadores.get(0);
         for (int i = 1; i < elevadores.size(); i++) {
-            maisProximo = (elevadores.get(i).verificarProximidade(pisoActual) > maisProximo.verificarProximidade(pisoActual)) ? elevadores.get(i) : maisProximo;
+            maisProximo = (elevadores.get(i).verificarProximo(pisoActual) > maisProximo.verificarProximo(pisoActual)) ? elevadores.get(i) : maisProximo;
         }
         return maisProximo;
     }
