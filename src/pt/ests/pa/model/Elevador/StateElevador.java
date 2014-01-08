@@ -72,4 +72,6 @@ public abstract class StateElevador {
      * @return Estado Actual do Elevador por palavras.
      */
     public abstract String palavras();
+    
+    public abstract void actualizar();
 }
