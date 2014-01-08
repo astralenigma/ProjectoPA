@@ -6,6 +6,7 @@ package projectopajavaconsole;
 
 import java.util.Scanner;
 import pt.ests.pa.controller.GestorDoPredio;
+import pt.ests.pa.model.Predio;
 import pt.ests.pa.view.VisualizadorDoPredio;
 
 /**
@@ -20,7 +21,7 @@ public class ProjectoPAJavaConsole {
     public static void main(String[] args) {
         
         Scanner sc = new Scanner(System.in);
-        int nmrPisos, nmrElevadores, capacidadeElevador;
+        int nmrPisos, nmrElevadores, capacidadeElevador, tempoIteracao = 500;
         do {
             System.out.println("Quantos Pisos tem o prédio?");
             nmrPisos = sc.nextInt();
@@ -35,14 +36,20 @@ public class ProjectoPAJavaConsole {
             sc.nextLine();
             capacidadeElevador = sc.nextInt();
         } while (capacidadeElevador < 1);
-        GestorDoPredio gdp = new GestorDoPredio(nmrPisos, nmrElevadores, capacidadeElevador);
-        gdp.criarPredio();
+        GestorDoPredio.getInstance().create(nmrPisos, nmrElevadores, capacidadeElevador);
+               
         VisualizadorDoPredio vdp = new VisualizadorDoPredio();
-        while (true) {
-            vdp.imprimirPredio();
-            gdp.criarPassageiros();
+                
+        Predio predio = GestorDoPredio.getInstance().getPredio();
+        
+        predio.addObserver(vdp);
+        
+        int iteracoes=60;
+        for (int i = 0; i < iteracoes; i++) {
+            
+            predio.simulaIteracao();
             try {
-                Thread.sleep(1000);
+                Thread.sleep(tempoIteracao);
             } catch (InterruptedException ex) {
                 Thread.currentThread().interrupt();
             }
