@@ -4,6 +4,7 @@
  */
 package projectopajavaconsole;
 
+import java.util.Scanner;
 import pt.ests.pa.controller.GestorDoPredio;
 import pt.ests.pa.view.VisualizadorDoPredio;
 
@@ -17,7 +18,24 @@ public class ProjectoPAJavaConsole {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        GestorDoPredio gdp = new GestorDoPredio();
+        
+        Scanner sc = new Scanner(System.in);
+        int nmrPisos, nmrElevadores, capacidadeElevador;
+        do {
+            System.out.println("Quantos Pisos tem o prédio?");
+            nmrPisos = sc.nextInt();
+        } while (8 > nmrPisos || nmrPisos > 16);
+        sc.nextLine();
+        do {
+            System.out.println("Quantos Elevadores tem o prédio?");
+            nmrElevadores = sc.nextInt();
+        } while (1 > nmrElevadores || nmrElevadores > 5);
+        do {
+            System.out.println("Qual a capacidade dos Elevadores do prédio?");
+            sc.nextLine();
+            capacidadeElevador = sc.nextInt();
+        } while (capacidadeElevador < 1);
+        GestorDoPredio gdp = new GestorDoPredio(nmrPisos, nmrElevadores, capacidadeElevador);
         gdp.criarPredio();
         VisualizadorDoPredio vdp = new VisualizadorDoPredio();
         while (true) {
