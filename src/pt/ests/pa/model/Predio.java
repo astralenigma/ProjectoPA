@@ -103,7 +103,7 @@ public class Predio extends Observable {
         for (int i = pisos.size() - 1; i >= 0; i--) {
             str += String.format("%02d", i) + String.format("%30s|", pisos.get(i));
             for (int j = 0; j < elevadores.size(); j++) {
-                str += String.format("%6s", (elevadores.get(j).getnumPisoActual() == i) ? elevadores.get(j) : "");
+                str += String.format("%8s", (elevadores.get(j).getnumPisoActual() == i) ? elevadores.get(j) : "");
             }
             str += "\n";
         }
