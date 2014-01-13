@@ -56,10 +56,19 @@ public class Piso {
         }
     }
 
+    /**
+     * Retorna o numero do piso
+     * @return numero do piso
+     */
+    public int getnPiso() {
+        return nPiso;
+    }
+
     public boolean existemPassageiros(int direccao) {
-        if (direccao>0) {
+        if (direccao > 0) {
             return existePassageiroSubir();
-        } if (direccao<0) {
+        }
+        if (direccao < 0) {
             return existePassageiroDescer();
         }
         return (existePassageiroDescer() || existePassageiroSubir());

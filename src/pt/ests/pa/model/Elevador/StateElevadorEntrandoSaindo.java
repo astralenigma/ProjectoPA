@@ -88,6 +88,7 @@ public class StateElevadorEntrandoSaindo extends StateElevador {
     public void actualizar() {
         getElevador().largarPassageiros();
         getElevador().receberPassageiros();
+        getElevador().removerPedido();
         fecharPortas();
     }
 }

@@ -21,21 +21,21 @@ public class ProjectoPAJavaConsole {
     public static void main(String[] args) {
         
         Scanner sc = new Scanner(System.in);
-        int nmrPisos, nmrElevadores, capacidadeElevador, tempoIteracao = 500;
-        do {
-            System.out.println("Quantos Pisos tem o prédio?");
-            nmrPisos = sc.nextInt();
-        } while (8 > nmrPisos || nmrPisos > 16);
-        sc.nextLine();
-        do {
-            System.out.println("Quantos Elevadores tem o prédio?");
-            nmrElevadores = sc.nextInt();
-        } while (1 > nmrElevadores || nmrElevadores > 5);
-        do {
-            System.out.println("Qual a capacidade dos Elevadores do prédio?");
-            sc.nextLine();
-            capacidadeElevador = sc.nextInt();
-        } while (capacidadeElevador < 1);
+        int nmrPisos=12, nmrElevadores=3, capacidadeElevador=5, tempoIteracao = 500;
+//        do {
+//            System.out.println("Quantos Pisos tem o prédio?");
+//            nmrPisos = sc.nextInt();
+//        } while (8 > nmrPisos || nmrPisos > 16);
+//        sc.nextLine();
+//        do {
+//            System.out.println("Quantos Elevadores tem o prédio?");
+//            nmrElevadores = sc.nextInt();
+//        } while (1 > nmrElevadores || nmrElevadores > 5);
+//        do {
+//            System.out.println("Qual a capacidade dos Elevadores do prédio?");
+//            sc.nextLine();
+//            capacidadeElevador = sc.nextInt();
+//        } while (capacidadeElevador < 1);
         GestorDoPredio.getInstance().create(nmrPisos, nmrElevadores, capacidadeElevador);
                
         VisualizadorDoPredio vdp = new VisualizadorDoPredio();

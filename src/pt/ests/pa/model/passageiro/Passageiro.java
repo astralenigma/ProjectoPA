@@ -5,7 +5,6 @@
 package pt.ests.pa.model.passageiro;
 
 import java.util.Random;
-import pt.ests.pa.model.Elevador.Elevador;
 
 /**
  *
@@ -31,7 +30,6 @@ public class Passageiro implements Comparable<Passageiro> {
         } while (origem == destino);
         estado = new StatePassageiroEmEspera(this);
         tempoDeEspera = 0;
-
     }
 
     /**
@@ -75,11 +73,12 @@ public class Passageiro implements Comparable<Passageiro> {
     public int getDestino() {
         return destino;
     }
-    public Passageiro aEntrar(){
+
+    public Passageiro aEntrar() {
         getEstado().entrar();
         return this;
     }
-    
+
     public StatePassageiro getEstado() {
         return estado;
     }
@@ -93,10 +92,10 @@ public class Passageiro implements Comparable<Passageiro> {
     public int compareTo(Passageiro t) {
 //        Precisamos de 2 compareTos dependendo do estado do Passageiro talvez tenhamos que verificar o estado do elevador
         if (estado instanceof StatePassageiroEmTransporte) {
-            if (destino>origem) {
-                return destino-t.destino;
-            }else{
-                return t.destino-destino;
+            if (destino > origem) {
+                return destino - t.destino;
+            } else {
+                return t.destino - destino;
             }
         }
         return compare(this) - compare(t);

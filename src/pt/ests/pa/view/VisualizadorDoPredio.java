@@ -17,12 +17,10 @@ public class VisualizadorDoPredio implements Observer {
     @Override
     public void update(Observable o, Object o1) {
         
-        if(o instanceof Predio) {
-            Predio p = (Predio)o;
+        if (o instanceof Predio) {
+            Predio p = (Predio) o;
             
             System.out.println(p.toString());
-        } 
-            
-        
+        }
     }
 }

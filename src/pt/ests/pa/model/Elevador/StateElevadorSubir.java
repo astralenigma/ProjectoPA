@@ -4,7 +4,9 @@
  */
 package pt.ests.pa.model.Elevador;
 
+import pt.ests.pa.controller.GestorDoPredio;
 import pt.ests.pa.model.exceptions.InvalidStateTransitionException;
+import pt.ests.pa.model.exceptions.ManobraIlegalException;
 
 /**
  *
@@ -22,6 +24,7 @@ public class StateElevadorSubir extends StateElevador {
 
     @Override
     public void subir() throws InvalidStateTransitionException {
+        getElevador().subir();
     }
 
     @Override
@@ -61,12 +64,21 @@ public class StateElevadorSubir extends StateElevador {
 
     @Override
     public void actualizar() {
-        if (getElevador().getnumPisoActual() < getElevador().getPisoDestino()) {
-            getElevador().subir();
-        } else if (getElevador().getnumPisoActual() == getElevador().getPisoDestino()) {
-            pararElevador();
+        if (getElevador().getnumPisoActual() < getElevador().getProximoDestino()) {
+            subir();
+        } else {
+            if (getElevador().getnumPisoActual() == getElevador().getProximoDestino()) {
+                pararElevador();
+            }
+        }
+        if(getElevador().getnumPisoActual() > getElevador().getProximoDestino()){
+            for (int i = 0; i < GestorDoPredio.getInstance().getPredio().getNmrElevadores(); i++) {
+                if (getElevador() == GestorDoPredio.getInstance().getPredio().getElevadores().get(i)) {
+                    throw new ManobraIlegalException("O elevador criminoso é " + (i + 1));
+                }
+            }
+            
         }
     }
     //NAO DEVE ACONTECER a situacao restante
 }
-

@@ -11,6 +11,7 @@ import pt.ests.pa.controller.GestorDoPredio;
 import pt.ests.pa.model.Piso;
 import pt.ests.pa.model.passageiro.Passageiro;
 import pt.ests.pa.model.tads.arraylist.ArrayList;
+import pt.ests.pa.model.tads.arraylist.ArrayListDNode;
 import pt.ests.pa.model.tads.priorityqueue.PriorityQueue;
 import pt.ests.pa.model.tads.priorityqueue.PriorityQueueDynamic;
 
@@ -22,15 +23,13 @@ import pt.ests.pa.model.tads.priorityqueue.PriorityQueueDynamic;
 public class Elevador implements Observer {
 
     private int pisoActual;
-    private int pisoDestino;
-    private int proximoDestino;
     private StateElevador estado;
     private PriorityQueue<Passageiro> passageiro;
     private ArrayList<Piso> pisos;
     private int nPisosPercorridos;
     private int tempoDeInactividade;
+    private ArrayList<Piso> listaPedidos;
 
-    //private ArrayList<Piso> listaPedidos;
     /**
      *
      * Constructor do Elevador.
@@ -45,14 +44,13 @@ public class Elevador implements Observer {
         this.passageiro = new PriorityQueueDynamic<>(capacidadeElevador);
         tempoDeInactividade = 0;
         nPisosPercorridos = 0;
-        pisoDestino = 0;
-        proximoDestino = 0;
+        listaPedidos = new ArrayListDNode<>();
     }
 
     /**
-     * Faz coisas porreiras relacionadas com
+     * Actualiza o estado do elevador.
      */
-    public void atualizar() {
+    public void actualizar() {
         estado.actualizar();
     }
 
@@ -62,7 +60,6 @@ public class Elevador implements Observer {
     public void subir() {
         pisoActual++;
         nPisosPercorridos++;
-        getEstado().subir();
     }
 
     /**
@@ -71,8 +68,8 @@ public class Elevador implements Observer {
      * @return True se o elevador esta cheio, False se a capacidade do elevador
      * ainda nao foi atingida
      */
-    public boolean isFull() {
-        return passageiro.size() > GestorDoPredio.getInstance().getPredio().getCapacidadeElevador();
+    public boolean estaCheio() {
+        return passageiro.size() == GestorDoPredio.getInstance().getPredio().getCapacidadeElevador();
     }
 
     /**
@@ -82,7 +79,7 @@ public class Elevador implements Observer {
     public void descer() {
         pisoActual--;
         nPisosPercorridos++;
-        getEstado().descer();
+        
     }
 
     /**
@@ -103,20 +100,25 @@ public class Elevador implements Observer {
         return estado;
     }
 
+    /**
+     * Incrementa o tempo que o elevador esta Parado.
+     */
     public void incrementarInactividade() {
         tempoDeInactividade++;
     }
 
     public int getProximoDestino() {
-        return proximoDestino;
+        if (listaPedidos.isEmpty()) {
+            return pisoActual;
+        }
+        return listaPedidos.get(0).getnPiso();
     }
 
     public int getPisoDestino() {
-        return pisoDestino;
-    }
-
-    public boolean elevadorEstaASubir() {
-        return pisoDestino > pisoActual;
+        if (listaPedidos.isEmpty()) {
+            return pisoActual;
+        }
+        return listaPedidos.get(listaPedidos.size() - 1).getnPiso();
     }
 
     /**
@@ -160,11 +162,11 @@ public class Elevador implements Observer {
      * Recebe Passageiros dos pisos.
      */
     public void receberPassageiros() {
-        while (getPisoActual().existemPassageiros(pisoDestino - pisoActual) && !isFull()) {
-            passageiro.enqueue(getPisoActual().enviarPassageiro(pisoDestino));
+        while (getPisoActual().existemPassageiros(getPisoDestino() - pisoActual) && !estaCheio()) {
+            passageiro.enqueue(getPisoActual().enviarPassageiro(getPisoDestino()));
         }
         if (!passageiro.isEmpty()) {
-            alterarDestino(passageiro.peek().getDestino());
+            alterarDestino(pisos.get(passageiro.peek().getDestino()));
         }
     }
 
@@ -172,24 +174,25 @@ public class Elevador implements Observer {
         return pisos.get(pisoActual);
     }
 
-    public void alterarDestino(int novoDestino) {
-        if (pisoDestino > pisoActual) {
-            pisoDestino = Math.max(novoDestino, pisoDestino);
-            if (proximoDestino == pisoActual) {
-                proximoDestino = novoDestino;
-                pisoDestino =Math.max(novoDestino, pisoDestino);
-            } else {
-                proximoDestino = Math.max(pisoDestino, novoDestino);
-            }
-        } else if (pisoDestino < pisoActual) {
-            pisoDestino = Math.min(novoDestino, pisoDestino);
-            if (proximoDestino == pisoActual) {
-                proximoDestino = novoDestino;
-            } else {
-                proximoDestino = Math.min(pisoDestino, novoDestino);
-            }
+    public void alterarDestino(Piso novoDestino) {
+        if (listaPedidos.isEmpty()) {
+            listaPedidos.add(0, novoDestino);
         } else {
-            pisoDestino = proximoDestino = novoDestino;
+            if (listaPedidos.get(listaPedidos.size() - 1).getnPiso() > pisoActual) {
+                for (int i = 0; i < listaPedidos.size(); i++) {
+                    if (listaPedidos.get(i).getnPiso() <= novoDestino.getnPiso()) {
+                        listaPedidos.add(i, novoDestino);
+                        break;
+                    }
+                }
+            } else {
+                for (int i = 0; i < listaPedidos.size(); i++) {
+                    if (listaPedidos.get(i).getnPiso() >= novoDestino.getnPiso()) {
+                        listaPedidos.add(i, novoDestino);
+                        break;
+                    }
+                }
+            }
         }
     }
 
@@ -203,8 +206,12 @@ public class Elevador implements Observer {
         //
     }
 
-    public boolean isEmpty() {
+    public boolean estaVazio() {
         return passageiro.isEmpty();
+    }
+
+    public void removerPedido() {
+        listaPedidos.remove(0);
     }
 
     public int verificarProximo(int piso) {
@@ -216,13 +223,13 @@ public class Elevador implements Observer {
     }
 
     public void largarPassageiros() {
-        if (!isEmpty()) {
+        if (!estaVazio()) {
             while (passageiro.peek().getDestino() == pisoActual) {
                 passageiro.dequeue();
-                if (isEmpty()) {
+                if (estaVazio()) {
                     break;
                 } else {
-                    alterarDestino(passageiro.peek().getDestino());
+                    alterarDestino(pisos.get(passageiro.peek().getDestino()));
                 }
             }
         }

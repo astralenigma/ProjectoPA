@@ -7,6 +7,8 @@ package pt.ests.pa.model;
 import java.util.Observable;
 import java.util.Random;
 import pt.ests.pa.model.Elevador.Elevador;
+import pt.ests.pa.model.Elevador.StateElevadorDescer;
+import pt.ests.pa.model.Elevador.StateElevadorSubir;
 import pt.ests.pa.model.passageiro.ConcreteCreatorPassageiro;
 import pt.ests.pa.model.passageiro.Passageiro;
 import pt.ests.pa.model.tads.arraylist.ArrayList;
@@ -88,11 +90,11 @@ public class Predio extends Observable {
      */
     public void gerarPassageiro(int nmrPiso, Passageiro p) {
         pisos.get(nmrPiso).gerarPassageiros(p);
-        Queue<Elevador> queue=listaElevadoresDisponiveis(p.getDestino() - p.getOrigem());
-        if (!queue.isEmpty()) {
-            elevadorMaisProximo(nmrPiso, queue).alterarDestino(nmrPiso);
+        Queue<Elevador> queue = listaElevadoresDisponiveis(p.getDestino() - p.getOrigem());
+        if (!(queue.isEmpty())) {
+            elevadorMaisProximo(nmrPiso, queue).alterarDestino(pisos.get(nmrPiso));
         }
-        
+
     }
 
     @Override
@@ -143,27 +145,52 @@ public class Predio extends Observable {
 
     private void atualizarElevadores() {
         for (int i = 0; i < nmrElevadores; i++) {
-            elevadores.get(i).atualizar();
+            elevadores.get(i).actualizar();
         }
+    }
+
+    private Queue<Elevador> listaElevadoresASubir() {
+        Queue<Elevador> listaElevadores = new QueueDynamic<>();
+        for (int i = 0; i < nmrElevadores; i++) {
+            if (elevadores.get(i).getnumPisoActual() < elevadores.get(i).getPisoDestino()) {
+                listaElevadores.enqueue(elevadores.get(i));
+            }
+        }
+        return listaElevadores;
+    }
+
+    private Queue<Elevador> listaElevadoresADescer() {
+        Queue<Elevador> listaElevadores = new QueueDynamic<>();
+        for (int i = 0; i < nmrElevadores; i++) {
+            Elevador elevador = elevadores.get(i);
+            if (elevador.getnumPisoActual() > elevador.getPisoDestino()) {
+                listaElevadores.enqueue(elevador);
+            }
+        }
+        return listaElevadores;
+    }
+
+    private Queue<Elevador> listaElevadoresParados() {
+        Queue<Elevador> listaElevadores = new QueueDynamic<>();
+        for (int i = 0; i < getNmrElevadores(); i++) {
+            if (elevadores.get(i).getnumPisoActual() == elevadores.get(i).getPisoDestino() && !(elevadores.get(i).getEstado() instanceof StateElevadorSubir)) {
+                listaElevadores.enqueue(elevadores.get(i));
+            }
+        }
+        return listaElevadores;
     }
 
     private Queue<Elevador> listaElevadoresDisponiveis(int direcao) {
         Queue<Elevador> listaElevadores = new QueueDynamic<>();
         if (direcao > 0) {
-            for (int i = 0; i < nmrElevadores; i++) {
-                Elevador elevador = elevadores.get(i);
-                if (elevador.getnumPisoActual() >= elevador.getPisoDestino()) {
-                    listaElevadores.enqueue(elevadores.get(i));
-                }
-
-            }
-        } else {
-            for (int i = 0; i < nmrElevadores; i++) {
-                Elevador elevador = elevadores.get(i);
-                if (elevador.getnumPisoActual() <= elevador.getPisoDestino()) {
-                    listaElevadores.enqueue(elevadores.get(i));
-                }
-            }
+            listaElevadores=listaElevadoresASubir();
+        } 
+        if (direcao<0) {
+            listaElevadores=listaElevadoresADescer();
+        }
+        Queue<Elevador> listaElevadoresParados = listaElevadoresParados();
+        while (!listaElevadoresParados.isEmpty()) {
+            listaElevadores.enqueue(listaElevadoresParados.dequeue());
         }
         return listaElevadores;
     }
