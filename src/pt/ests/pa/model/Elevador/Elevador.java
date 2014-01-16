@@ -40,11 +40,11 @@ public class Elevador implements Observer {
     public Elevador(ArrayList<Piso> pisos, int capacidadeElevador) {
         this.pisos = pisos;
         this.pisoActual = 0;
-        this.estado = new StateElevadorPortasFechadas(this);
         this.passageiro = new PriorityQueueDynamic<>(capacidadeElevador);
         tempoDeInactividade = 0;
         nPisosPercorridos = 0;
         listaPedidos = new ArrayListDNode<>();
+        this.estado = new StateElevadorPortasFechadas(this);
     }
 
     /**
@@ -79,7 +79,6 @@ public class Elevador implements Observer {
     public void descer() {
         pisoActual--;
         nPisosPercorridos++;
-        
     }
 
     /**
@@ -109,14 +108,14 @@ public class Elevador implements Observer {
 
     public int getProximoDestino() {
         if (listaPedidos.isEmpty()) {
-            return pisoActual;
+            return -1;
         }
         return listaPedidos.get(0).getnPiso();
     }
 
     public int getPisoDestino() {
         if (listaPedidos.isEmpty()) {
-            return pisoActual;
+            return -1;
         }
         return listaPedidos.get(listaPedidos.size() - 1).getnPiso();
     }
@@ -164,8 +163,6 @@ public class Elevador implements Observer {
     public void receberPassageiros() {
         while (getPisoActual().existemPassageiros(getPisoDestino() - pisoActual) && !estaCheio()) {
             passageiro.enqueue(getPisoActual().enviarPassageiro(getPisoDestino()));
-        }
-        if (!passageiro.isEmpty()) {
             alterarDestino(pisos.get(passageiro.peek().getDestino()));
         }
     }
@@ -206,12 +203,21 @@ public class Elevador implements Observer {
         //
     }
 
+    /**
+     * Verifica se existem passageiros.
+     *
+     * @return Retorna um boolean dependendo da quantidade de passageiros.
+     */
     public boolean estaVazio() {
         return passageiro.isEmpty();
     }
 
     public void removerPedido() {
-        listaPedidos.remove(0);
+        for (int i = listaPedidos.size(); i > 0; i--) {
+            if (listaPedidos.get(i) == getPisoActual()) {
+                listaPedidos.remove(i);
+            }
+        }
     }
 
     public int verificarProximo(int piso) {
@@ -225,13 +231,17 @@ public class Elevador implements Observer {
     public void largarPassageiros() {
         if (!estaVazio()) {
             while (passageiro.peek().getDestino() == pisoActual) {
-                passageiro.dequeue();
-                if (estaVazio()) {
-                    break;
-                } else {
-                    alterarDestino(pisos.get(passageiro.peek().getDestino()));
-                }
+                pisos.get(pisoActual).receberPassageiro(passageiro.dequeue());
             }
         }
+    }
+
+    /**
+     * Verifica se o elevador tem pedidos.
+     *
+     * @return
+     */
+    public boolean naoTemDestino() {
+        return listaPedidos.isEmpty();
     }
 }
