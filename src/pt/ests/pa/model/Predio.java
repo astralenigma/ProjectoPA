@@ -7,8 +7,6 @@ package pt.ests.pa.model;
 import java.util.Observable;
 import java.util.Random;
 import pt.ests.pa.model.Elevador.Elevador;
-import pt.ests.pa.model.Elevador.StateElevadorDescer;
-import pt.ests.pa.model.Elevador.StateElevadorSubir;
 import pt.ests.pa.model.passageiro.ConcreteCreatorPassageiro;
 import pt.ests.pa.model.passageiro.Passageiro;
 import pt.ests.pa.model.tads.arraylist.ArrayList;
@@ -152,8 +150,10 @@ public class Predio extends Observable {
     private Queue<Elevador> listaElevadoresASubir() {
         Queue<Elevador> listaElevadores = new QueueDynamic<>();
         for (int i = 0; i < nmrElevadores; i++) {
-            if (elevadores.get(i).getnumPisoActual() < elevadores.get(i).getPisoDestino()) {
-                listaElevadores.enqueue(elevadores.get(i));
+            if (!elevadores.get(i).naoTemDestino()) {
+                if (elevadores.get(i).getnumPisoActual() < elevadores.get(i).getPisoDestino()) {
+                    listaElevadores.enqueue(elevadores.get(i));
+                }
             }
         }
         return listaElevadores;
@@ -162,9 +162,10 @@ public class Predio extends Observable {
     private Queue<Elevador> listaElevadoresADescer() {
         Queue<Elevador> listaElevadores = new QueueDynamic<>();
         for (int i = 0; i < nmrElevadores; i++) {
-            Elevador elevador = elevadores.get(i);
-            if (elevador.getnumPisoActual() > elevador.getPisoDestino()) {
-                listaElevadores.enqueue(elevador);
+            if (!elevadores.get(i).naoTemDestino()) {
+                if (elevadores.get(i).getnumPisoActual() > elevadores.get(i).getPisoDestino()) {
+                    listaElevadores.enqueue(elevadores.get(i));
+                }
             }
         }
         return listaElevadores;
@@ -173,7 +174,7 @@ public class Predio extends Observable {
     private Queue<Elevador> listaElevadoresParados() {
         Queue<Elevador> listaElevadores = new QueueDynamic<>();
         for (int i = 0; i < getNmrElevadores(); i++) {
-            if (elevadores.get(i).getnumPisoActual() == elevadores.get(i).getPisoDestino() && !(elevadores.get(i).getEstado() instanceof StateElevadorSubir)) {
+            if (elevadores.get(i).naoTemDestino()) {
                 listaElevadores.enqueue(elevadores.get(i));
             }
         }
@@ -183,10 +184,10 @@ public class Predio extends Observable {
     private Queue<Elevador> listaElevadoresDisponiveis(int direcao) {
         Queue<Elevador> listaElevadores = new QueueDynamic<>();
         if (direcao > 0) {
-            listaElevadores=listaElevadoresASubir();
-        } 
-        if (direcao<0) {
-            listaElevadores=listaElevadoresADescer();
+            listaElevadores = listaElevadoresASubir();
+        }
+        if (direcao < 0) {
+            listaElevadores = listaElevadoresADescer();
         }
         Queue<Elevador> listaElevadoresParados = listaElevadoresParados();
         while (!listaElevadoresParados.isEmpty()) {

@@ -18,6 +18,7 @@ public class StateElevadorPortasFechadas extends StateElevador {
      */
     public StateElevadorPortasFechadas(Elevador elevador) {
         super(elevador);
+        getElevador().removerPedido();
     }
 
     /**
@@ -86,18 +87,18 @@ public class StateElevadorPortasFechadas extends StateElevador {
 
     @Override
     public void actualizar() {
-        
-        if (getElevador().getnumPisoActual() == getElevador().getProximoDestino()) {
-            if (!getElevador().estaVazio() || getElevador().existemPassageirosParaApanhar()) {
+        if (getElevador().naoTemDestino()) {
+            getElevador().incrementarInactividade();
+        } else {
+            if (getElevador().getnumPisoActual() == getElevador().getProximoDestino()) {
                 abrirPortas();
             } else {
-                getElevador().incrementarInactividade();
-            }
-        } else {
-            if (getElevador().getnumPisoActual() < getElevador().getProximoDestino()) {
-                getElevador().subir();
-            } else if (getElevador().getnumPisoActual() > getElevador().getProximoDestino()) {
-                getElevador().descer();
+                if (getElevador().getnumPisoActual() < getElevador().getProximoDestino()) {
+                    getElevador().subir();
+                }
+                if (getElevador().getnumPisoActual() > getElevador().getProximoDestino()) {
+                    getElevador().descer();
+                }
             }
         }
     }

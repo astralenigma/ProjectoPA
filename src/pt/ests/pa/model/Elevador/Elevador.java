@@ -28,10 +28,9 @@ public class Elevador implements Observer {
     private ArrayList<Piso> pisos;
     private int nPisosPercorridos;
     private int tempoDeInactividade;
-    private ArrayList<Piso> listaPedidos;
+    private ArrayList<Integer> listaPedidos;
 
     /**
-     *
      * Constructor do Elevador.
      *
      * @param pisos Lista dos pisos do prédio.
@@ -110,14 +109,14 @@ public class Elevador implements Observer {
         if (listaPedidos.isEmpty()) {
             return -1;
         }
-        return listaPedidos.get(0).getnPiso();
+        return listaPedidos.get(0);
     }
 
     public int getPisoDestino() {
         if (listaPedidos.isEmpty()) {
             return -1;
         }
-        return listaPedidos.get(listaPedidos.size() - 1).getnPiso();
+        return listaPedidos.get(listaPedidos.size() - 1);
     }
 
     /**
@@ -171,13 +170,18 @@ public class Elevador implements Observer {
         return pisos.get(pisoActual);
     }
 
-    public void alterarDestino(Piso novoDestino) {
+    /**
+     * Compara o destino com a lista de destinos e adiciona.
+     *
+     * @param novoDestino novo destino a ser acrescentado à lista.
+     */
+    public void alterarDestino(int novoDestino) {
         if (listaPedidos.isEmpty()) {
             listaPedidos.add(0, novoDestino);
         } else {
             if (listaPedidos.get(listaPedidos.size() - 1).getnPiso() > pisoActual) {
                 for (int i = 0; i < listaPedidos.size(); i++) {
-                    if (listaPedidos.get(i).getnPiso() <= novoDestino.getnPiso()) {
+                    if (listaPedidos.get(i) <= novoDestino) {
                         listaPedidos.add(i, novoDestino);
                         break;
                     }
@@ -212,6 +216,9 @@ public class Elevador implements Observer {
         return passageiro.isEmpty();
     }
 
+    /**
+     * Método que remove um pedido.
+     */
     public void removerPedido() {
         for (int i = listaPedidos.size(); i > 0; i--) {
             if (listaPedidos.get(i) == getPisoActual()) {
@@ -220,14 +227,28 @@ public class Elevador implements Observer {
         }
     }
 
+    /**
+     * Método que compara a distancia entre o elevador e um piso.
+     *
+     * @param piso Piso a comparar
+     * @return Devolve a distancia entre o elevador e o piso.
+     */
     public int verificarProximo(int piso) {
         return (piso > pisoActual) ? piso - pisoActual : pisoActual - piso;
     }
 
+    /**
+     * Verifica se existem passageiros no piso com destino a subir ou a descer.
+     *
+     * @return
+     */
     public boolean existemPassageirosParaApanhar() {
         return getPisoActual().existemPassageiros(getPisoDestino() - getnumPisoActual());
     }
 
+    /**
+     * Método que envia os passageiros do elevador para o piso.
+     */
     public void largarPassageiros() {
         if (!estaVazio()) {
             while (passageiro.peek().getDestino() == pisoActual) {
@@ -239,7 +260,7 @@ public class Elevador implements Observer {
     /**
      * Verifica se o elevador tem pedidos.
      *
-     * @return
+     * @return Devolve false se tiver destino e true se não tiver.
      */
     public boolean naoTemDestino() {
         return listaPedidos.isEmpty();
