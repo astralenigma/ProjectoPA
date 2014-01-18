@@ -11,6 +11,7 @@ import pt.ests.pa.model.tads.Iterator;
 
 /**
  *
+ * @param <E> Classe do Objecto a ser inserido na Fila
  * @author Rui
  */
 public class QueueDynamic<E> implements Queue<E> {
@@ -20,10 +21,17 @@ public class QueueDynamic<E> implements Queue<E> {
     private int size;
     private int capacity;
 
+    /**
+     *
+     */
     public QueueDynamic() {
         this(-1);
     }
 
+    /**
+     *
+     * @param capacity
+     */
     public QueueDynamic(int capacity) {
         head = new DNode(null, null, null);
         tail = new DNode(null, head, null);
@@ -32,29 +40,47 @@ public class QueueDynamic<E> implements Queue<E> {
         this.capacity = capacity;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int size() {
         return size;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public boolean isEmpty() {
         return size == 0;
     }
 
+    /**
+     *
+     * @param elem
+     * @throws FullQueueException
+     */
     @Override
     public void enqueue(E elem) throws FullQueueException {
 //        System.out.println(size);
         if (size == capacity) {
             throw new FullQueueException();
         }
-        DNode<E> beforeTail=tail.getPrev();
+        DNode<E> beforeTail = tail.getPrev();
         DNode<E> newDNode = new DNode(elem, beforeTail, tail);
         beforeTail.setNext(newDNode);
         tail.setPrev(newDNode);
         size++;
     }
 
+    /**
+     *
+     * @return
+     * @throws EmptyQueueException
+     */
     @Override
     public E dequeue() throws EmptyQueueException {
         if (isEmpty()) {
@@ -67,6 +93,11 @@ public class QueueDynamic<E> implements Queue<E> {
         return rDNode.getElem();
     }
 
+    /**
+     *
+     * @return
+     * @throws EmptyQueueException
+     */
     @Override
     public E peek() throws EmptyQueueException {
         if (isEmpty()) {
@@ -75,6 +106,10 @@ public class QueueDynamic<E> implements Queue<E> {
         return head.getNext().getElem();
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public Iterator<E> getIterator() {
         return new IteratorQueueDynamic();
@@ -89,7 +124,7 @@ public class QueueDynamic<E> implements Queue<E> {
         }
 
         @Override
-        public E getNext() {
+        public E next() {
             E elem = pos.getElem();
             pos = pos.getNext();
             return elem;
@@ -101,13 +136,17 @@ public class QueueDynamic<E> implements Queue<E> {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
-        String string = "[";
+        String string = "";
         for (Iterator it = getIterator(); it.hasNext();) {
-            string += it.getNext();
-            string += (it.hasNext()) ? ", " : "]";
+            string += it.next();
+            string += (it.hasNext()) ? ", " : "";
         }
-        return string; //To change body of generated methods, choose Tools | Templates.
+        return string;
     }
 }

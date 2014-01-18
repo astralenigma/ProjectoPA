@@ -6,10 +6,19 @@ package pt.ests.pa.model.tads;
 
 /**
  *
+ * @param <E> Classe do Objecto a ser inserido no Iterador
  * @author Rui
  */
 public interface Iterator<E> {
-    public E getNext();
+    /**
+     *
+     * @return
+     */
+    public E next();
+    /**
+     *
+     * @return
+     */
     public boolean hasNext();
     
 }

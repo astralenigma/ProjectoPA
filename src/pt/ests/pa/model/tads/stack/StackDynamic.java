@@ -11,6 +11,7 @@ import pt.ests.pa.model.tads.Node;
 
 /**
  *
+ * @param <E> Classe do Objecto a ser inserido na Pilha
  * @author Rui
  */
 public class StackDynamic<E> implements Stack<E> {
@@ -19,26 +20,46 @@ public class StackDynamic<E> implements Stack<E> {
     private Node<E> top;
     private int maxCapacity;
 
+    /**
+     *
+     * @param capacity
+     */
     public StackDynamic(int capacity) {
         this.maxCapacity = capacity;
         this.size = 0;
         this.top = null;
     }
 
+    /**
+     *
+     */
     public StackDynamic() {
         this(-1);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int size() {
         return this.size;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public boolean isEmpty() {
         return (this.size == 0);
     }
 
+    /**
+     *
+     * @return
+     * @throws EmptyStackException
+     */
     @Override
     public E peek() throws EmptyStackException {
         if (isEmpty()) {
@@ -48,6 +69,11 @@ public class StackDynamic<E> implements Stack<E> {
 
     }
 
+    /**
+     *
+     * @param elem
+     * @throws FullStackException
+     */
     @Override
     public void push(E elem) throws FullStackException {
         if (isFull()) {
@@ -58,6 +84,11 @@ public class StackDynamic<E> implements Stack<E> {
         size++;
     }
 
+    /**
+     *
+     * @return
+     * @throws EmptyStackException
+     */
     @Override
     public E pop() throws EmptyStackException {
         if (isEmpty()) {
@@ -69,10 +100,18 @@ public class StackDynamic<E> implements Stack<E> {
         return elemRemoved;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isFull() {
         return (size == maxCapacity);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public Iterator<E> getIterator() {
         return new IteratorStackDynamic();
@@ -87,7 +126,7 @@ public class StackDynamic<E> implements Stack<E> {
         }
 
         @Override
-        public E getNext() {
+        public E next() {
             E elem = pos.getElement();
             pos = pos.getNext();
             return elem;
@@ -99,13 +138,18 @@ public class StackDynamic<E> implements Stack<E> {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
-        String string = "[";
+        String string = "";
         for (Iterator it = getIterator(); it.hasNext();) {
-            string += it.getNext();
-            string += (it.hasNext()) ? ", " : "]";
+            string += it.next();
+            string += (it.hasNext()) ? ", " : "";
         }
-        return string; //To change body of generated methods, choose Tools | Templates.
+        string += "";
+        return string; 
     }
 }

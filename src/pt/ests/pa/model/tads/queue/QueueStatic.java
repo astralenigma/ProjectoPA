@@ -10,6 +10,7 @@ import pt.ests.pa.model.tads.Iterator;
 
 /**
  *
+ * @param <E> Classe do Objecto a ser inserido na Fila
  * @author Rui
  */
 public class QueueStatic<E> implements Queue<E> {
@@ -17,8 +18,12 @@ public class QueueStatic<E> implements Queue<E> {
     private int begin, end;
     private int capacity;
     private E[] queue;
-    private static final int DEFAUlTCAPACITY=100;
+    private static final int DEFAUlTCAPACITY = 100;
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int size() {
         if (isFull()) {
@@ -28,11 +33,19 @@ public class QueueStatic<E> implements Queue<E> {
         }
     }
 
+    /**
+     *
+     * @param capacity
+     */
     public QueueStatic(int capacity) {
-        queue=(E[]) new Object[capacity];
-        begin=end=0;
-        this.capacity=capacity;
+        queue = (E[]) new Object[capacity];
+        begin = end = 0;
+        this.capacity = capacity;
     }
+
+    /**
+     *
+     */
     public QueueStatic() {
         this(DEFAUlTCAPACITY);
     }
@@ -41,11 +54,20 @@ public class QueueStatic<E> implements Queue<E> {
         return (begin == end && queue[begin] != null);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public boolean isEmpty() {
         return (begin == end && queue[begin] == null);
     }
 
+    /**
+     *
+     * @return
+     * @throws EmptyQueueException
+     */
     @Override
     public E peek() throws EmptyQueueException {
         if (isEmpty()) {
@@ -56,6 +78,11 @@ public class QueueStatic<E> implements Queue<E> {
         }
     }
 
+    /**
+     *
+     * @param elem
+     * @throws FullQueueException
+     */
     @Override
     public void enqueue(E elem) throws FullQueueException {
         if (!isFull()) {
@@ -66,6 +93,11 @@ public class QueueStatic<E> implements Queue<E> {
         }
     }
 
+    /**
+     *
+     * @return
+     * @throws EmptyQueueException
+     */
     @Override
     public E dequeue() throws EmptyQueueException {
         if (isEmpty()) {
@@ -78,6 +110,10 @@ public class QueueStatic<E> implements Queue<E> {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public Iterator<E> getIterator() {
         return new IteratorQueueStatic();
@@ -97,20 +133,24 @@ public class QueueStatic<E> implements Queue<E> {
         }
 
         @Override
-        public E getNext() {
+        public E next() {
             E elem = queue[pos];
             pos = (pos + 1) % capacity;
             return elem;
         }
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
-        String string = "[";
+        String string = "";
         for (Iterator it = getIterator(); it.hasNext();) {
-            string += it.getNext();
-            string += (it.hasNext()) ? ", " : "]";
+            string += it.next();
+            string += (it.hasNext()) ? ", " : "";
         }
-        return string; //To change body of generated methods, choose Tools | Templates.
+        return string; 
     }
 }

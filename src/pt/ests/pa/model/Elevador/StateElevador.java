@@ -8,27 +8,70 @@ import pt.ests.pa.model.exceptions.InvalidStateTransitionException;
 
 /**
  *
- * @author brunomnsilva
+ * @author Rui Carvalho
  */
 public abstract class StateElevador {
 
-    private Elevador machine;
+    private Elevador elevador;
 
-    public StateElevador(Elevador machine) {
-        this.machine = machine;
+    /**
+     *
+     * @param elevador
+     */
+    public StateElevador(Elevador elevador) {
+        this.elevador = elevador;
     }
 
+    /**
+     *
+     * @return
+     */
     public Elevador getElevador() {
-        return machine;
+        return elevador;
     }
 
+    /**
+     *
+     * @throws InvalidStateTransitionException
+     */
     public abstract void subir() throws InvalidStateTransitionException;
 
-    public abstract void paradoPortaAberta() throws InvalidStateTransitionException;
+    /**
+     *
+     * @throws InvalidStateTransitionException
+     */
+    public abstract void abrirPortas() throws InvalidStateTransitionException;
 
-    public abstract void paradoPortaFechada() throws InvalidStateTransitionException;
+    /**
+     *
+     * @throws InvalidStateTransitionException
+     */
+    public abstract void fecharPortas() throws InvalidStateTransitionException;
 
+    /**
+     *
+     * @throws InvalidStateTransitionException
+     */
     public abstract void descer() throws InvalidStateTransitionException;
 
-    public abstract void entradaSaida() throws InvalidStateTransitionException;
+    /**
+     *
+     * @throws InvalidStateTransitionException
+     */
+    public abstract void entradaSaidaDePassageiros() throws InvalidStateTransitionException;
+
+    /**
+     *
+     * @throws InvalidStateTransitionException
+     */
+    public abstract void pararElevador() throws InvalidStateTransitionException;
+
+    /**
+     * Apresenta o estado actual do Elevador
+     *
+     * @return Estado Actual do Elevador por palavras.
+     */
+    public abstract String palavras();
+    
+    public abstract void actualizar();
 }

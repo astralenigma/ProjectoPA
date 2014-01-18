@@ -10,6 +10,7 @@ import pt.ests.pa.model.tads.Iterator;
 
 /**
  *
+ * @param <E> Classe do Objecto a ser inserido na Pilha
  * @author Rui
  */
 public class StackStatic<E> implements Stack<E> {
@@ -19,26 +20,46 @@ public class StackStatic<E> implements Stack<E> {
     private int capacity;
     private static final int DEFAUlTCAPACITY = 100;
 
+    /**
+     *
+     * @param capacity
+     */
     public StackStatic(int capacity) {
         this.capacity = capacity;
         stack = (E[]) new Object[capacity];
         top = 0;
     }
 
+    /**
+     *
+     */
     public StackStatic() {
         this(DEFAUlTCAPACITY);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public boolean isEmpty() {
         return top == 0;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int size() {
         return top;
     }
 
+    /**
+     *
+     * @return
+     * @throws EmptyStackException
+     */
     @Override
     public E peek() throws EmptyStackException {
         if (isEmpty()) {
@@ -47,6 +68,11 @@ public class StackStatic<E> implements Stack<E> {
         return stack[top - 1];
     }
 
+    /**
+     *
+     * @param elem
+     * @throws FullStackException
+     */
     @Override
     public void push(E elem) throws FullStackException {
         if (top == capacity) {
@@ -55,6 +81,11 @@ public class StackStatic<E> implements Stack<E> {
         stack[top++] = elem;
     }
 
+    /**
+     *
+     * @return
+     * @throws EmptyStackException
+     */
     @Override
     public E pop() throws EmptyStackException {
         if (isEmpty()) {
@@ -65,6 +96,10 @@ public class StackStatic<E> implements Stack<E> {
         return elem;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public Iterator<E> getIterator() {
         return new IteratorStackStatic();
@@ -79,7 +114,7 @@ public class StackStatic<E> implements Stack<E> {
         }
 
         @Override
-        public E getNext() {
+        public E next() {
             E elem = stack[pos++];
             return elem;
         }
@@ -90,13 +125,18 @@ public class StackStatic<E> implements Stack<E> {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
-        String string = "[";
+        String string = "";
         for (Iterator it = getIterator(); it.hasNext();) {
-            string += it.getNext();
-            string += (it.hasNext()) ? ", " : "]";
+            string += it.next();
+            string += (it.hasNext()) ? ", " : "";
         }
-        return string; //To change body of generated methods, choose Tools | Templates.
+        string += "";
+        return string;
     }
 }

@@ -12,6 +12,7 @@ import pt.ests.pa.model.tads.Iterator;
 
 /**
  *
+ * @param <E> Classe do Objecto a ser inserido no ArrayList
  * @author Rui
  */
 public class ArrayListDNode<E> implements ArrayList<E> {
@@ -20,6 +21,10 @@ public class ArrayListDNode<E> implements ArrayList<E> {
     private int size;
     private int capacity;
 
+    /**
+     *
+     * @param capacity
+     */
     public ArrayListDNode(int capacity) {
         head = new DNode(null, null, null);
         tail = new DNode(null, head, null);
@@ -28,6 +33,9 @@ public class ArrayListDNode<E> implements ArrayList<E> {
         this.capacity = capacity;
     }
 
+    /**
+     *
+     */
     public ArrayListDNode() {
         this(-1);
     }
@@ -67,7 +75,7 @@ public class ArrayListDNode<E> implements ArrayList<E> {
     @Override
     public void add(int i, E elem) throws IndexOutOfBoundsException, FullArrayListException {
         DNode node = nodeAtIndex(i);
-        if (size==capacity) {
+        if (size == capacity) {
             throw new FullArrayListException();
         }
         DNode newNode = new DNode(elem, node.getPrev(), node);
@@ -106,9 +114,9 @@ public class ArrayListDNode<E> implements ArrayList<E> {
     }
 
     @Override
-    public E get(int i) throws IndexOutOfBoundsException ,EmptyArrayListException{
+    public E get(int i) throws IndexOutOfBoundsException, EmptyArrayListException {
         E elem = nodeAtIndex(i).getElem();
-        if(isEmpty()){
+        if (isEmpty()) {
             throw new EmptyArrayListException();
         }
         return elem;
@@ -129,6 +137,10 @@ public class ArrayListDNode<E> implements ArrayList<E> {
 //        str+=(nodeAtIndex(size-1)+"]");
 //        return str; 
 //    }
+    /**
+     *
+     * @return
+     */
     @Override
     public Iterator<E> getIterator() {
         return new IteratorDNodeArrayList();
@@ -143,7 +155,7 @@ public class ArrayListDNode<E> implements ArrayList<E> {
         }
 
         @Override
-        public E getNext() {
+        public E next() {
             E elem = pos.getElem();
             pos = pos.getNext();
             return elem;
@@ -155,12 +167,16 @@ public class ArrayListDNode<E> implements ArrayList<E> {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
-        String string = "[";
+        String string = "";
         for (Iterator it = getIterator(); it.hasNext();) {
-            string += it.getNext();
-            string += (it.hasNext()) ? ", " : "]";
+            string += it.next();
+            string += (it.hasNext()) ? ", " : "";
         }
         return string; //To change body of generated methods, choose Tools | Templates.
     }

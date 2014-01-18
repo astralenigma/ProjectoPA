@@ -11,6 +11,7 @@ import pt.ests.pa.model.tads.Iterator;
 
 /**
  *
+ * @param <E> Classe do Objecto a ser inserido no ArrayList
  * @author Rui
  */
 public class ArrayListStatic<E> implements ArrayList<E> {
@@ -19,10 +20,18 @@ public class ArrayListStatic<E> implements ArrayList<E> {
     private int size;
     private static final int DEFAUlTCAPACITY = 100;
 
+    /**
+     *
+     * @param capacity
+     */
     public ArrayListStatic(int capacity) {
         array = (E[]) new Object[capacity];
         size = 0;
     }
+
+    /**
+     *
+     */
     public ArrayListStatic() {
         this(DEFAUlTCAPACITY);
     }
@@ -39,7 +48,7 @@ public class ArrayListStatic<E> implements ArrayList<E> {
 
     @Override
     public void add(int i, E elem) throws IndexOutOfBoundsException, FullArrayListException {
-        if (size==array.length) {
+        if (size == array.length) {
             throw new FullArrayListException();
         }
         if (i < 0 || i > size) {
@@ -64,7 +73,7 @@ public class ArrayListStatic<E> implements ArrayList<E> {
     }
 
     @Override
-    public E set(int i, E elem) throws IndexOutOfBoundsException,EmptyArrayListException {
+    public E set(int i, E elem) throws IndexOutOfBoundsException, EmptyArrayListException {
         if (i < 0 || i > size) {
             throw new IndexOutOfBoundsException();
         }
@@ -93,6 +102,10 @@ public class ArrayListStatic<E> implements ArrayList<E> {
         return remElem;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public Iterator<E> getIterator() {
         return new IteratorArrayListStatic();
@@ -112,20 +125,24 @@ public class ArrayListStatic<E> implements ArrayList<E> {
         }
 
         @Override
-        public E getNext() {
+        public E next() {
             E elem = array[pos];
             pos++;
             return elem;
         }
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
-        String string = "[";
+        String string = "";
         for (Iterator it = getIterator(); it.hasNext();) {
-            string += it.getNext();
-            string += (it.hasNext()) ? ", " : "]";
+            string += it.next();
+            string += (it.hasNext()) ? ", " : "";
         }
-        return string; //To change body of generated methods, choose Tools | Templates.
+        return string; 
     }
 }
