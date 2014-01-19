@@ -24,34 +24,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });
-
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
-
-        Scene scene = new Scene(root, 300, 250);
-
-        primaryStage.setTitle("Hello World!");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
-
-    /**
-     * The main() method is ignored in correctly deployed JavaFX application.
-     * main() serves only as fallback in case the application can not be
-     * launched through deployment artifacts, e.g., in IDEs with limited FX
-     * support. NetBeans ignores main().
-     *
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int nmrPisos = 12, nmrElevadores = 3, capacidadeElevador = 5, tempoIteracao = 500;
 //        do {
@@ -76,8 +48,9 @@ public class Main extends Application {
 
         predio.addObserver(vdp);
 
-        int iteracoes = 60;
-        for (int i = 0; i < iteracoes; i++) {
+//        int iteracoes = 60;
+//        for (int i = 0; i < iteracoes; i++) {
+        while(true){
             predio.simulaIteracao();
             try {
                 Thread.sleep(tempoIteracao);
@@ -94,6 +67,35 @@ public class Main extends Application {
 //        for (int i = 0; i < 3; i++) {
 //            System.out.println(passageiros[i]);    
 //        }
+//        Button btn = new Button();
+//        btn.setText("Say 'Hello World'");
+//        btn.setOnAction(new EventHandler<ActionEvent>() {
+//            @Override
+//            public void handle(ActionEvent event) {
+//                System.out.println("Hello World!");
+//            }
+//        });
+//
+//        StackPane root = new StackPane();
+//        root.getChildren().add(btn);
+//
+//        Scene scene = new Scene(root, 300, 250);
+//
+//        primaryStage.setTitle("Hello World!");
+//        primaryStage.setScene(scene);
+//        primaryStage.show();
+    }
+
+    /**
+     * The main() method is ignored in correctly deployed JavaFX application.
+     * main() serves only as fallback in case the application can not be
+     * launched through deployment artifacts, e.g., in IDEs with limited FX
+     * support. NetBeans ignores main().
+     *
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        
         launch(args);
     }
 }

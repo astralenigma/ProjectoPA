@@ -48,16 +48,18 @@ public class Piso {
             } else {
                 return passageirosADescer.dequeue();
             }
-        }
-        if (pisoDestino > nPiso) {
-            return passageirosASubir.dequeue().aEntrar();
         } else {
-            return passageirosADescer.dequeue().aEntrar();
+            if (pisoDestino > nPiso) {
+                return passageirosASubir.dequeue().aEntrar();
+            } else {
+                return passageirosADescer.dequeue().aEntrar();
+            }
         }
     }
 
     /**
      * Retorna o numero do piso
+     *
      * @return numero do piso
      */
     public int getnPiso() {

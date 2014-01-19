@@ -18,7 +18,7 @@ public class StateElevadorPortasFechadas extends StateElevador {
      */
     public StateElevadorPortasFechadas(Elevador elevador) {
         super(elevador);
-        getElevador().removerPedido();
+        getElevador().removerDestinos();
     }
 
     /**
