@@ -52,15 +52,16 @@ public class Passageiro implements Comparable<Passageiro> {
     }
 
     /**
-     *
+     * Incrementa o tempo de espera do elevador.
      */
     public void incrementarTempoDeEspera() {
         tempoDeEspera++;
     }
 
     /**
-     *
-     * @return
+     * Devolve a origem do passageiro.
+     * 
+     * @return 
      */
     public int getOrigem() {
         return origem;
@@ -74,11 +75,19 @@ public class Passageiro implements Comparable<Passageiro> {
         return destino;
     }
 
+    /**
+     *
+     * @return
+     */
     public Passageiro aEntrar() {
         getEstado().entrar();
         return this;
     }
 
+    /**
+     *
+     * @return
+     */
     public StatePassageiro getEstado() {
         return estado;
     }

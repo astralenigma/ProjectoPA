@@ -66,6 +66,12 @@ public class Piso {
         return nPiso;
     }
 
+    /**
+     * Método para verificar a existência de passageiros.
+     * 
+     * @param direccao Recebe a direcção em que o elevador vai em int.
+     * @return boolean que significa a existência de passageiros no piso para o elevador apanhar.
+     */
     public boolean existemPassageiros(int direccao) {
         if (direccao > 0) {
             return existePassageiroSubir();
@@ -129,4 +135,15 @@ public class Piso {
         }
         return passsageiros + "";
     }
+
+    /**
+     * Cria uma lista de passageiros que chegaram ao piso.
+     * 
+     * @return A lista de passageiros.
+     */
+    public String passageirosAtendidos() {
+        return passageirosAtendidos.toString();
+    }
+    
+    
 }

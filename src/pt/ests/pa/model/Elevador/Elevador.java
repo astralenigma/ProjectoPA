@@ -29,6 +29,7 @@ public class Elevador implements Observer {
     private int nPisosPercorridos;
     private int tempoDeInactividade;
     private ArrayList<Integer> listaDestinos;
+    private int numeroDePassageirosAtendidos;
 
     /**
      * Constructor do Elevador.
@@ -44,6 +45,7 @@ public class Elevador implements Observer {
         nPisosPercorridos = 0;
         listaDestinos = new ArrayListDNode<>();
         this.estado = new StateElevadorPortasFechadas(this);
+        numeroDePassageirosAtendidos=0;
     }
 
     /**
@@ -105,6 +107,10 @@ public class Elevador implements Observer {
         tempoDeInactividade++;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getProximoDestino() {
         if (listaDestinos.isEmpty()) {
             return -1;
@@ -112,6 +118,11 @@ public class Elevador implements Observer {
         return listaDestinos.get(0);
     }
 
+    /**
+     * Devolve o número do piso destino final.
+     * 
+     * @return O número do piso destino.
+     */
     public int getPisoDestino() {
         if (listaDestinos.isEmpty()) {
             return -1;
@@ -207,6 +218,11 @@ public class Elevador implements Observer {
         return String.format("|%2s%02d%2s|", estado, passageiro.size(), estado);
     }
 
+    /**
+     *
+     * @param o
+     * @param o1
+     */
     @Override
     public void update(Observable o, Object o1) {
         //
@@ -245,7 +261,7 @@ public class Elevador implements Observer {
     /**
      * Verifica se existem passageiros no piso com destino a subir ou a descer.
      *
-     * @return
+     * @return Se existem passageiros para apanhar.
      */
     public boolean existemPassageirosParaApanhar() {
         return getPisoActual().existemPassageiros(getPisoDestino() - getnumPisoActual());

@@ -29,6 +29,13 @@ public class Predio extends Observable {
     private int nmrElevadores;
     private int capacidadeElevador;
 
+    /**
+     * Método constructor do prédio.
+     *
+     * @param nmrPisos O número de pisos do prédio.
+     * @param nmrElevadores O número de elevadores do prédio.
+     * @param capacidadeElevador A capacidade dos elevadores do prédio.
+     */
     public Predio(int nmrPisos, int nmrElevadores, int capacidadeElevador) {
         this.nmrPisos = nmrPisos;
         this.nmrElevadores = nmrElevadores;
@@ -44,6 +51,9 @@ public class Predio extends Observable {
         }
     }
 
+    /**
+     * Simula uma iteração no prédio.
+     */
     public void simulaIteracao() {
 
         criarPassageiros();
@@ -55,6 +65,11 @@ public class Predio extends Observable {
         notifyObservers();
     }
 
+    /**
+     * Devolve a lista de elevadores no prédio.
+     *
+     * @return A lista de elevadores no prédio.
+     */
     public ArrayList<Elevador> getElevadores() {
         return elevadores;
     }
@@ -105,7 +120,7 @@ public class Predio extends Observable {
             for (int j = 0; j < elevadores.size(); j++) {
                 str += String.format("%8s", (elevadores.get(j).getnumPisoActual() == i) ? elevadores.get(j) : "");
             }
-            str += "\n";
+            str += "|" + pisos.get(i).passageirosAtendidos() + "\n";
         }
         for (int i = 0; i < elevadores.size(); i++) {
             str += ("Numero do elevador: " + (i + 1) + "\n");
@@ -116,6 +131,13 @@ public class Predio extends Observable {
         return str;
     }
 
+    /**
+     * Elevador mais próximo do piso actual.
+     *
+     * @param pisoActual O número do piso actual.
+     * @param elevadores Recebe a lista de elevadores dísponíveis.
+     * @return Devolve o elevador mais próximo do passageiro.
+     */
     public Elevador elevadorMaisProximo(int pisoActual, Queue<Elevador> elevadores) {
         Elevador maisProximo = elevadores.dequeue();
         for (int i = 1; !elevadores.isEmpty(); i++) {
@@ -125,28 +147,38 @@ public class Predio extends Observable {
         return maisProximo;
     }
 
-    public ArrayList<Piso> getPisos() {
-        return pisos;
-    }
-
-    public int getNmrPisos() {
-        return nmrPisos;
-    }
-
+    /**
+     * Devolve o número de elevadores no prédio.
+     *
+     * @return O número de elevadores no prédio.
+     */
     public int getNmrElevadores() {
         return nmrElevadores;
     }
 
+    /**
+     * Devolve a capacidade máxima de elevadores.
+     *
+     * @return capacidade dos elevadores.
+     */
     public int getCapacidadeElevador() {
         return capacidadeElevador;
     }
 
+    /**
+     * Método que actualiza os elevadores.
+     */
     private void atualizarElevadores() {
         for (int i = 0; i < nmrElevadores; i++) {
             elevadores.get(i).actualizar();
         }
     }
 
+    /**
+     * Cria uma lista com todos os elevadores que estão a subir.
+     *
+     * @return Devolve um Queue de elevadores
+     */
     private Queue<Elevador> listaElevadoresASubir() {
         Queue<Elevador> listaElevadores = new QueueDynamic<>();
         for (int i = 0; i < nmrElevadores; i++) {
@@ -159,6 +191,11 @@ public class Predio extends Observable {
         return listaElevadores;
     }
 
+    /**
+     * Cria uma lista com todos os elevadores que estão a descer.
+     *
+     * @return Devolve um Queue de elevadores
+     */
     private Queue<Elevador> listaElevadoresADescer() {
         Queue<Elevador> listaElevadores = new QueueDynamic<>();
         for (int i = 0; i < nmrElevadores; i++) {
@@ -171,9 +208,14 @@ public class Predio extends Observable {
         return listaElevadores;
     }
 
+    /**
+     * Cria uma lista com todos os elevadores que Parados.
+     *
+     * @return Devolve um Queue de elevadores
+     */
     private Queue<Elevador> listaElevadoresParados() {
         Queue<Elevador> listaElevadores = new QueueDynamic<>();
-        for (int i = 0; i < getNmrElevadores(); i++) {
+        for (int i = 0; i < nmrElevadores; i++) {
             if (elevadores.get(i).naoTemDestino()) {
                 listaElevadores.enqueue(elevadores.get(i));
             }
@@ -181,6 +223,11 @@ public class Predio extends Observable {
         return listaElevadores;
     }
 
+    /**
+     * Cria uma lista de todos os elevadores disponiveis.
+     *
+     * @return Devolve um Queue de elevadores
+     */
     private Queue<Elevador> listaElevadoresDisponiveis(int direcao) {
         Queue<Elevador> listaElevadores = new QueueDynamic<>();
         if (direcao > 0) {
