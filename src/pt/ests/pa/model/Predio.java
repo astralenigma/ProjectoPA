@@ -6,6 +6,7 @@ package pt.ests.pa.model;
 
 import java.util.Observable;
 import java.util.Random;
+import javafx.scene.image.ImageView;
 import pt.ests.pa.model.Elevador.Elevador;
 import pt.ests.pa.model.passageiro.ConcreteCreatorPassageiro;
 import pt.ests.pa.model.passageiro.Passageiro;
@@ -28,7 +29,9 @@ public class Predio extends Observable {
     private int nmrPisos;
     private int nmrElevadores;
     private int capacidadeElevador;
-
+private ImageView[] esperaView;
+    private ImageView[] atendidosView;
+    private ImageView[][] predioView;
     /**
      * Método constructor do prédio.
      *

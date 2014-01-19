@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="pt.ests.pa.controller.GestorDoPredio">
+  <children>
+    <Button layoutX="244.0" layoutY="284.0" mnemonicParsing="false" onMouseClicked="#criarPredio" text="Criar" />
+    <TextField fx:id="numeroDePisos" layoutX="91.0" layoutY="134.0" prefWidth="91.0" />
+    <Label layoutX="91.0" layoutY="81.0" text="Número de Pisos" />
+    <Label layoutX="244.0" layoutY="81.0" text="Número de elevadores" />
+    <Label layoutX="422.0" layoutY="81.0" text="Capacidade dos elevadores" />
+    <TextField fx:id="numeroDeElevadores" layoutX="244.0" layoutY="134.0" prefWidth="121.0" />
+    <TextField fx:id="capacidadeDosElevadores" layoutX="422.0" layoutY="134.0" prefWidth="145.0" />
+  </children>
+</AnchorPane>
