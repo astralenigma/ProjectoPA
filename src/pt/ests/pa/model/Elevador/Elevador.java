@@ -1,4 +1,3 @@
-
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -220,7 +219,7 @@ public class Elevador implements Observer {
      * Método que remove um pedido.
      */
     public void removerPedido() {
-        for (int i = listaPedidos.size()-1; i > 0; i--) {
+        for (int i = listaPedidos.size()-1; i >= 0; i--) {
             if (listaPedidos.get(i) == getnumPisoActual()) {
                 listaPedidos.remove(i);
             }
