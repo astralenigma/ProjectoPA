@@ -4,13 +4,14 @@
  */
 package pt.ests.pa;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.Scanner;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.JavaFXBuilderFactory;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import pt.ests.pa.controller.GestorDoPredio;
 import pt.ests.pa.model.Predio;
@@ -23,7 +24,7 @@ import pt.ests.pa.view.VisualizadorDoPredio;
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws IOException {
         Scanner sc = new Scanner(System.in);
         int nmrPisos = 12, nmrElevadores = 3, capacidadeElevador = 5, tempoIteracao = 500;
 //        do {
@@ -50,23 +51,16 @@ public class Main extends Application {
 
 //        int iteracoes = 60;
 //        for (int i = 0; i < iteracoes; i++) {
-        while(true){
-            predio.simulaIteracao();
-            try {
-                Thread.sleep(tempoIteracao);
-            } catch (InterruptedException ex) {
-                Thread.currentThread().interrupt();
-            }
-        }
-//        Piso piso = new Piso(5);
-//        System.out.println(piso);
-//        Passageiro[] passageiros =new Passageiro[3];
-//        passageiros[0] =new Adulto(5);
-//        passageiros[1] =new Crianca(5);
-//        passageiros[2] =new Deficiente(5);
-//        for (int i = 0; i < 3; i++) {
-//            System.out.println(passageiros[i]);    
-//        }
+        URL location = getClass().getResource("/pt/ests/pa/view/ViewPredioFX.fxml");
+
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(location);
+        fxmlLoader.setBuilderFactory(new JavaFXBuilderFactory());
+        Parent root = (Parent) fxmlLoader.load(location.openStream());
+
+        Thread t = new Thread(predio);
+        t.start();
+
 //        Button btn = new Button();
 //        btn.setText("Say 'Hello World'");
 //        btn.setOnAction(new EventHandler<ActionEvent>() {
@@ -80,10 +74,10 @@ public class Main extends Application {
 //        root.getChildren().add(btn);
 //
 //        Scene scene = new Scene(root, 300, 250);
-//
-//        primaryStage.setTitle("Hello World!");
-//        primaryStage.setScene(scene);
-//        primaryStage.show();
+        Scene scene = new Scene(root);
+        primaryStage.setTitle("Prédio");
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
     /**
@@ -95,7 +89,7 @@ public class Main extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+
         launch(args);
     }
 }
