@@ -11,10 +11,7 @@ package pt.ests.pa.model.passageiro;
  */
 public class Deficiente extends Passageiro {
 
-    /**
-     *
-     * @param nmrMaxPisos
-     */
+   
     public Deficiente(int nmrMaxPisos) {
         super(nmrMaxPisos);
     }

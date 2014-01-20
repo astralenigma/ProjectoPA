@@ -7,10 +7,11 @@ package pt.ests.pa.model.passageiro;
 import java.util.Random;
 
 /**
+ * Classe Abstracta do passageiro.
  *
  * @author Rui
  */
-public class Passageiro implements Comparable<Passageiro> {
+public abstract class Passageiro implements Comparable<Passageiro> {
 
     private int destino, origem;
     private StatePassageiro estado;
@@ -60,24 +61,26 @@ public class Passageiro implements Comparable<Passageiro> {
 
     /**
      * Devolve a origem do passageiro.
-     * 
-     * @return 
+     *
+     * @return Origem do passageiro.
      */
     public int getOrigem() {
         return origem;
     }
 
     /**
+     * Devolve o destino do passageiro.
      *
-     * @return
+     * @return Destino do passageiro.
      */
     public int getDestino() {
         return destino;
     }
 
     /**
+     * Altera o estado do passageiro para em transporte.
      *
-     * @return
+     * @return Devolve-se com o novo estado.
      */
     public Passageiro aEntrar() {
         getEstado().entrar();
@@ -85,18 +88,14 @@ public class Passageiro implements Comparable<Passageiro> {
     }
 
     /**
+     * Envia os estado do Passageiro.
      *
-     * @return
+     * @return Estado do Passageiro.
      */
     public StatePassageiro getEstado() {
         return estado;
     }
 
-    /**
-     *
-     * @param t
-     * @return
-     */
     @Override
     public int compareTo(Passageiro t) {
 //        Precisamos de 2 compareTos dependendo do estado do Passageiro talvez tenhamos que verificar o estado do elevador

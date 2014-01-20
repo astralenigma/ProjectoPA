@@ -11,18 +11,12 @@ package pt.ests.pa.model.passageiro;
  */
 public class Adulto extends Passageiro {
 
-    /**
-     *
-     * @param nmrMaxPisos
-     */
+    
     public Adulto(int nmrMaxPisos) {
         super(nmrMaxPisos);
     }
 
-    /**
-     *
-     * @return
-     */
+    
     @Override
     public String toString() {
         return "A(" + getOrigem() + "," + getDestino() + ")";
