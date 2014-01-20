@@ -6,14 +6,19 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="pt.ests.pa.model.Predio">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="pt.ests.pa.view.VisualizadorDoPredio">
   <children>
-    <HBox layoutX="0.0" layoutY="0.0" prefHeight="400.0" prefWidth="600.0">
+    <VBox layoutX="0.0" layoutY="0.0" prefHeight="400.0000999999975" prefWidth="600.0">
       <children>
-        <VBox id="pisosAEspera" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS" />
-        <HBox prefHeight="100.0" prefWidth="200.0" />
-        <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS" />
+        <HBox prefHeight="400.0" prefWidth="600.0" VBox.vgrow="SOMETIMES">
+          <children>
+            <VBox id="pisosAEspera" fx:id="pisos" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS" />
+            <HBox fx:id="elevadores" prefHeight="100.0" prefWidth="200.0" />
+            <VBox fx:id="pisosAtendidos" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS" />
+          </children>
+        </HBox>
+        <HBox fx:id="informacaoElevadores" prefHeight="100.0" prefWidth="200.0" />
       </children>
-    </HBox>
+    </VBox>
   </children>
 </AnchorPane>
