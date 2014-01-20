@@ -5,19 +5,36 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="pt.ests.pa.view.VisualizadorDoPredio">
+<AnchorPane prefHeight="483.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="pt.ests.pa.view.VisualizadorDoPredio">
   <children>
-    <VBox layoutX="0.0" layoutY="0.0" prefHeight="400.0000999999975" prefWidth="600.0">
+    <VBox minWidth="-1.0" prefHeight="475.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <children>
         <HBox prefHeight="400.0" prefWidth="600.0" VBox.vgrow="SOMETIMES">
           <children>
-            <VBox id="pisosAEspera" fx:id="pisos" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS" />
-            <HBox fx:id="elevadores" prefHeight="100.0" prefWidth="200.0" />
-            <VBox fx:id="pisosAtendidos" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS" />
+            <VBox id="pisosAEspera" fx:id="pisos" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+              <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+              </children>
+            </VBox>
+            <HBox fx:id="elevadores" prefHeight="100.0" prefWidth="200.0">
+              <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+              </children>
+            </HBox>
+            <VBox fx:id="pisosAtendidos" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+              <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+              </children>
+            </VBox>
           </children>
         </HBox>
-        <HBox fx:id="informacaoElevadores" prefHeight="100.0" prefWidth="200.0" />
+        <HBox fx:id="informacaoElevadores" prefHeight="101.0" prefWidth="600.0">
+          <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+          </children>
+        </HBox>
       </children>
     </VBox>
   </children>
