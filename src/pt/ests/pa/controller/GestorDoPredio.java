@@ -33,7 +33,7 @@ public class GestorDoPredio {
     }
 
     /**
-     * Cria o predio
+     * Cria o predio.
      *
      * @param nmrPisos
      * @param nmrElevadores
