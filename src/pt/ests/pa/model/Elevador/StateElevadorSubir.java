@@ -71,6 +71,7 @@ public class StateElevadorSubir extends StateElevador {
                 pararElevador();
             }
         }
+        //Código de imprevistos.
         if(getElevador().getnumPisoActual() > getElevador().getProximoDestino()){
             for (int i = 0; i < GestorDoPredio.getInstance().getPredio().getNmrElevadores(); i++) {
                 if (getElevador() == GestorDoPredio.getInstance().getPredio().getElevadores().get(i)) {
