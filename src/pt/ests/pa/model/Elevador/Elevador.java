@@ -45,7 +45,7 @@ public class Elevador implements Observer {
         nPisosPercorridos = 0;
         listaDestinos = new ArrayListDNode<>();
         this.estado = new StateElevadorPortasFechadas(this);
-        numeroDePassageirosAtendidos=0;
+        numeroDePassageirosAtendidos = 0;
     }
 
     /**
@@ -53,6 +53,14 @@ public class Elevador implements Observer {
      */
     public void actualizar() {
         estado.actualizar();
+    }
+
+    /**
+     * Este método serve como backup quando um elevador fica parado com
+     * passageiros e sem destino.
+     */
+    public void loucuraDeVerao() {
+        listaDestinos.add(0, passageiro.peek().getDestino());
     }
 
     /**
@@ -120,7 +128,7 @@ public class Elevador implements Observer {
 
     /**
      * Devolve o número do piso destino final.
-     * 
+     *
      * @return O número do piso destino.
      */
     public int getPisoDestino() {
@@ -173,6 +181,7 @@ public class Elevador implements Observer {
     public void receberPassageiros() {
         while (getPisoActual().existemPassageiros(getPisoDestino() - pisoActual) && !estaCheio()) {
             passageiro.enqueue(getPisoActual().enviarPassageiro(getPisoDestino()));
+            numeroDePassageirosAtendidos++;
             alterarDestino(passageiro.peek().getDestino());
         }
     }
@@ -198,6 +207,10 @@ public class Elevador implements Observer {
             if (listaDestinos.get(listaDestinos.size() - 1) > pisoActual) {
                 for (int i = 0; i < listaDestinos.size(); i++) {
                     if (listaDestinos.get(i) <= novoDestino) {
+                            listaDestinos.add(i, novoDestino);
+                        break;
+                    }                 
+                    if (i == (listaDestinos.size())-1) {
                         listaDestinos.add(i, novoDestino);
                         break;
                     }
@@ -205,6 +218,10 @@ public class Elevador implements Observer {
             } else {
                 for (int i = 0; i < listaDestinos.size(); i++) {
                     if (listaDestinos.get(i) >= novoDestino) {
+                        listaDestinos.add(i, novoDestino);
+                        break;
+                    }
+                    if (i == (listaDestinos.size() - 1)) {
                         listaDestinos.add(i, novoDestino);
                         break;
                     }
