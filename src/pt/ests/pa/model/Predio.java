@@ -6,7 +6,7 @@ package pt.ests.pa.model;
 
 import java.util.Observable;
 import java.util.Random;
-import javafx.scene.image.ImageView;
+import pt.ests.pa.controller.GestorDoPredio;
 import pt.ests.pa.model.Elevador.Elevador;
 import pt.ests.pa.model.passageiro.ConcreteCreatorPassageiro;
 import pt.ests.pa.model.passageiro.Passageiro;
@@ -20,7 +20,7 @@ import pt.ests.pa.model.tads.queue.QueueDynamic;
  *
  * @author Rui
  */
-public class Predio extends Observable {
+public class Predio extends Observable implements Runnable {
 
     //private static Predio instance;
     private ArrayList<Piso> pisos;
@@ -29,9 +29,7 @@ public class Predio extends Observable {
     private int nmrPisos;
     private int nmrElevadores;
     private int capacidadeElevador;
-private ImageView[] esperaView;
-    private ImageView[] atendidosView;
-    private ImageView[][] predioView;
+
     /**
      * Método constructor do prédio.
      *
@@ -68,6 +66,18 @@ private ImageView[] esperaView;
         notifyObservers();
     }
 
+    @Override
+    public void run() {
+        while (true) {
+            simulaIteracao();
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException ex) {
+                Thread.currentThread().interrupt();
+            }
+        }
+    }
+
     /**
      * Devolve a lista de elevadores no prédio.
      *
@@ -92,9 +102,9 @@ private ImageView[] esperaView;
     private void criarPassageiros() {
         Random rd = new Random();
         if (rd.nextBoolean()) {
-            notifyObservers();
             Passageiro p = ccp.factoryMethod(rd.nextInt(3), nmrPisos);
             gerarPassageiro(p.getOrigem(), p);
+            setChanged();
         }
     }
 
@@ -249,4 +259,9 @@ private ImageView[] esperaView;
     private void atualizarEstatisticas() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public ArrayList<Piso> getPisos() {
+        return pisos;
+    }
+    
 }
