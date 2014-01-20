@@ -88,6 +88,9 @@ public class StateElevadorPortasFechadas extends StateElevador {
     @Override
     public void actualizar() {
         if (getElevador().naoTemDestino()) {
+            if (!getElevador().estaVazio()) {
+                getElevador().loucuraDeVerao();
+            }
             getElevador().incrementarInactividade();
         } else {
             if (getElevador().getnumPisoActual() == getElevador().getProximoDestino()) {
