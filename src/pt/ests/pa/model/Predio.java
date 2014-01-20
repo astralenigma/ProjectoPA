@@ -6,7 +6,6 @@ package pt.ests.pa.model;
 
 import java.util.Observable;
 import java.util.Random;
-import pt.ests.pa.controller.GestorDoPredio;
 import pt.ests.pa.model.Elevador.Elevador;
 import pt.ests.pa.model.passageiro.ConcreteCreatorPassageiro;
 import pt.ests.pa.model.passageiro.Passageiro;
@@ -263,5 +262,4 @@ public class Predio extends Observable implements Runnable {
     public ArrayList<Piso> getPisos() {
         return pisos;
     }
-    
 }

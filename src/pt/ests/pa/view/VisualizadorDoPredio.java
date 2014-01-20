@@ -4,12 +4,15 @@
  */
 package pt.ests.pa.view;
 
+import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.ResourceBundle;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.fxml.Initializable;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import pt.ests.pa.model.Elevador.Elevador;
 import pt.ests.pa.model.Predio;
 
@@ -17,28 +20,30 @@ import pt.ests.pa.model.Predio;
  *
  * @author Rui
  */
-public class VisualizadorDoPredio implements Observer {
+public class VisualizadorDoPredio implements Observer, Initializable {
 
     @FXML
     public VBox pisos;
+    @FXML
     public HBox elevadores;
+    @FXML
     public VBox pisosAtendidos;
+    @FXML
     public HBox informacaoElevadores;
 
-    public VisualizadorDoPredio() {
-    pisos=new VBox();
-    elevadores=new HBox();
-    pisosAtendidos=new VBox();
-    informacaoElevadores= new HBox();
-    }
+//    public VisualizadorDoPredio() {
+//        pisos = new VBox();
+//        elevadores = new HBox();
+//        pisosAtendidos = new VBox();
+//        informacaoElevadores = new HBox();
+//    }
 
-    
     @Override
     public void update(Observable o, Object o1) {
 
         if (o instanceof Predio) {
             Predio p = (Predio) o;
-//            clear();
+            clear();
             writePisos(p);
             writeElevadores(p);
             System.out.println(p.toString());
@@ -47,8 +52,8 @@ public class VisualizadorDoPredio implements Observer {
 
     public void writePisos(Predio p) {
         for (int i = p.getMaxPisos() - 1; i >= 0; i--) {
-            pisos.getChildren().add(new Label(p.getPisos().get(i).toString()));
-            pisosAtendidos.getChildren().add(new Label(p.getPisos().get(i).passageirosAtendidos()));
+            pisos.getChildren().add(new Text(p.getPisos().get(i).toString()));
+            pisosAtendidos.getChildren().add(new Text(p.getPisos().get(i).passageirosAtendidos()));
         }
     }
 
@@ -61,14 +66,14 @@ public class VisualizadorDoPredio implements Observer {
             str += ("Numero de passageiros no elevador: " + e.getNmrPassageiros() + "\n");
             str += ("Estado do Elevador: " + e.getEstado().palavras() + "\n");
             str += ("Distancia Percorrida: " + e.getnPisosPercorridos() + "\n");
-            informacaoElevadores.getChildren().add(new Label(str));
+            informacaoElevadores.getChildren().add(new Text(str));
         }
     }
 
     public VBox drawElevador(Predio p, Elevador e) {
         VBox v = new VBox();
         for (int i = p.getMaxPisos() - 1; i >= 0; i--) {
-            v.getChildren().add(new Label((e.getnumPisoActual() == i) ? (e.toString()) : ""));
+            v.getChildren().add(new Text((e.getnumPisoActual() == i) ? (e.toString()) : ""));
         }
         return v;
     }
@@ -78,5 +83,13 @@ public class VisualizadorDoPredio implements Observer {
         informacaoElevadores.getChildren().clear();
         pisos.getChildren().clear();
         pisosAtendidos.getChildren().clear();
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+//        pisos = new VBox();
+//        elevadores = new HBox();
+//        pisosAtendidos = new VBox();
+//        informacaoElevadores = new HBox();
     }
 }

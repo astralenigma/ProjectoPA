@@ -42,22 +42,24 @@ public class Main extends Application {
 //            capacidadeElevador = sc.nextInt();
 //        } while (capacidadeElevador < 1);
         GestorDoPredio.getInstance().create(nmrPisos, nmrElevadores, capacidadeElevador);
-
-        VisualizadorDoPredio vdp = new VisualizadorDoPredio();
-
         Predio predio = GestorDoPredio.getInstance().getPredio();
-
-        predio.addObserver(vdp);
+        
 
 //        int iteracoes = 60;
 //        for (int i = 0; i < iteracoes; i++) {
         URL location = getClass().getResource("/pt/ests/pa/view/ViewPredioFX.fxml");
-
+        
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(location);
         fxmlLoader.setBuilderFactory(new JavaFXBuilderFactory());
         Parent root = (Parent) fxmlLoader.load(location.openStream());
-
+        VisualizadorDoPredio vdp = (VisualizadorDoPredio) fxmlLoader.getController();
+        predio.addObserver(vdp);
+        
+        Scene scene = new Scene(root);
+        primaryStage.setTitle("Prédio");
+        primaryStage.setScene(scene);
+        primaryStage.show();
         Thread t = new Thread(predio);
         t.start();
 
@@ -74,10 +76,7 @@ public class Main extends Application {
 //        root.getChildren().add(btn);
 //
 //        Scene scene = new Scene(root, 300, 250);
-        Scene scene = new Scene(root);
-        primaryStage.setTitle("Prédio");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+
     }
 
     /**
